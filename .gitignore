@@ -45,6 +45,9 @@ yarn-error.log*
 *.db-journal
 promptshield.db
 
+# Generated Reports
+docs/reports/PromptShield_run_*.pdf
+
 # OS & Editor
 .DS_Store
 Thumbs.db

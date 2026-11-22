@@ -1,7 +1,7 @@
-# PromptShield — Prompt Safety Tester (Red-Team Kit)
-**Course:** SCSE4041 Prompt Engineering · **Institution:** Bennett University  
-**Problem Bank ID:** C23 · **Team ID:** C23 · **Milestone:** 2 (12 Marks)  
-**Submission Deadline:** 22 November 2026, 11:59 PM IST  
+# PromptShield — AI Prompt Safety Tester (Red-Team Kit)
+> **Test your AI prompts. Find weaknesses. Make them safer.**
+
+PromptShield is an open-source prompt security evaluation and hardening tool for teams building AI chatbots and LLM-powered applications.
 
 [![Python Version](https://img.shields.io/badge/Python-3.11%2B%20%7C%203.12-blue)](https://www.python.org/)
 [![FastAPI](https://img.shields.io/badge/FastAPI-0.115%2B-009688)](https://fastapi.tiangolo.com/)
@@ -12,17 +12,22 @@
 
 ---
 
-## 1. Project Overview
-PromptShield is an authorized developer-security evaluation and prompt hardening kit designed for software engineering teams building domain-specific LLM chatbots. As conversational assistants are deployed into production environments (such as university academic advisement portals, clinical triage, and retail wealth management), naive developer system prompts are routinely bypassed by adversarial techniques: direct instruction overrides, administrative persona spoofing, canary token exfiltration, untrusted retrieval injections, and delimiter confusion.
+## 1. Product Overview
+PromptShield helps you check whether your AI assistant's instructions can be manipulated, and shows you how to make them stronger.
 
-PromptShield automates the defensive prompt lifecycle:
-1. **Target Specification:** Ingests a chatbot's system prompt, domain policies, permitted/prohibited rules, and dummy canary secret (`BENNETT-SECRET-2026-X9`).
-2. **Adversarial Generation (P1 v3):** Synthesizes a balanced 12-vector adversarial test suite across 9 distinct attack categories.
-3. **Target Execution:** Invokes the target LLM, logging round-trip latency, token consumption, and true model responses.
-4. **Hybrid Evaluation (P2 v3):** Employs exact canary substring matching coupled with semantic LLM evaluation to detect policy violations, quote exact evidence excerpts, and prevent false-positive over-refusals on benign queries.
-5. **Guardrail Optimization (P3 v3):** Analyzes empirical vulnerabilities and synthesizes an improved system prompt implementing defense-in-depth principles (immutable instruction hierarchy, untrusted input boundary encapsulation `<user_input>`, canary confinement, and standardized refusal anchors).
-6. **Comparative Verification:** Re-executes the identical 12 vectors to measure Attack Success Rate (ASR) reduction while guaranteeing 100% utility preservation.
-7. **Audit Reporting:** Generates downloadable ReportLab PDF reports, CSV logs, and JSON payloads.
+When deploying conversational assistants (customer support, internal knowledge bots, or specialized workflows), naive system prompts are vulnerable to:
+- Direct instruction overrides
+- Role and persona spoofing
+- Confidential system prompt & secret leakage
+- Delimiter and format manipulation
+- Untrusted context injections
+- Multilingual evasion attacks
+
+### The 4-Step Workflow
+1. **Paste Your Prompt:** Enter your chatbot's instructions or choose a pre-built example.
+2. **Automated Safety Checks:** PromptShield prepares adversarial test cases across critical safety categories.
+3. **Understand Results:** Receive an immediate safety score out of 100, plain-English findings, and exact quotes showing where your prompt yielded.
+4. **Improve & Compare:** Generate hardened instructions incorporating defense-in-depth guardrails and re-test to see verified score improvements.
 
 ---
 
@@ -133,9 +138,12 @@ PromptShield/
 │       ├── prompts/templates.py       # Versioned prompt templates
 │       ├── services/                  # Business logic (Generator, Evaluator, Optimizer)
 │       └── api/routes.py              # REST API endpoints (Modules A–I)
-├── frontend/                          # React 18 + Vite + Tailwind CSS dashboard
-│   ├── src/                           # Components (Dashboard, Workspace, Diff, etc.)
-│   └── dist/                          # Compiled static SPA
+├── frontend/                          # React 18 + Vite + Tailwind CSS single-page UI
+│   ├── src/                           # Modern step-by-step security workflow
+│   │   ├── components/                # PromptInput, TestingProgress, ResultsSummary, ImprovePrompt, AdvancedOptions
+│   │   ├── types.ts                   # Domain types and user-friendly translations
+│   │   └── App.tsx                    # Main interactive workflow
+│   └── dist/                          # Compiled production build
 ├── prompts/                           # Versioned prompts
 │   ├── v1/                            # Baseline naive prompts
 │   ├── v2/                            # Structured JSON prompts
@@ -145,13 +153,11 @@ PromptShield/
 │   ├── inputs/                        # benchmark_tests.json, templates.json
 │   ├── outputs/                       # baseline_runs.json, hardened_runs.json
 │   └── experiments/                   # prompt_iteration_results.json
-├── docs/                              # Academic documentation
+├── docs/                              # Documentation, diagrams & visual assets
 │   ├── diagrams/                      # Mermaid source files & rendered SVGs
 │   ├── screenshots/                   # Labeled test evidence screenshots
-│   ├── reports/                       # Generated PDF reports (< 10 MB)
-│   │   ├── M2_C23_PromptShield.pdf    # Mandatory 7-section report
-│   │   └── TeamPromptShield_TechnicalReport.pdf # 2-page technical report
-│   └── submission/                    # Form answers, reel script, audit
+│   ├── reports/                       # Generated audit PDF reports
+│   └── academic/                      # Academic evaluation archive, guidelines & reports
 ├── tests/                             # Automated pytest unit tests
 └── code/                              # Index referencing backend & frontend
 ```
