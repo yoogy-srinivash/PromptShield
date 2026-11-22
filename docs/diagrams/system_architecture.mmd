@@ -1,0 +1,47 @@
+graph TB
+    subgraph FrontendLayer ["Frontend (React 18 + Vite + Tailwind CSS)"]
+        UI1["Dashboard &amp; Metrics"]
+        UI2["System Prompt Workspace"]
+        UI3["Test Generator &amp; Execution Inspector"]
+        UI4["Evidence &amp; Rationale Viewer"]
+        UI5["Prompt Diff &amp; Optimizer"]
+        UI6["Before/After Comparative Analytics"]
+        UI7["Report Exporter (PDF/CSV/JSON)"]
+    end
+
+    subgraph APILayer ["FastAPI Backend (Python 3.12)"]
+        R1["/api/status &amp; /api/templates"]
+        R2["/api/generate-tests"]
+        R3["/api/execute-and-evaluate"]
+        R4["/api/harden-prompt"]
+        R5["/api/compare-prompts"]
+        R6["/api/export/* (ReportLab Engine)"]
+        R7["/api/demo/run (Built-in Walkthrough)"]
+    end
+
+    subgraph ServiceLayer ["Core Prompt &amp; Security Services"]
+        S1["Prompt Template Manager (v1, v2, v3)"]
+        S2["Test Suite Generator (P1)"]
+        S3["Target Chatbot Executor"]
+        S4["Hybrid Response Evaluator (P2)"]
+        S5["Guardrail Optimizer &amp; Diff Engine (P3)"]
+        S6["Comparative Experiment Runner"]
+    end
+
+    subgraph ModelAdapters ["LLM Provider Adapters"]
+        MA1["Google Gemini Adapter (gemini-2.5-flash)"]
+        MA2["OpenAI Adapter (gpt-4o-mini)"]
+        MA3["Ollama Local Adapter (llama3.2)"]
+        MA4["Deterministic Offline Fixture Engine"]
+    end
+
+    subgraph PersistenceLayer ["Persistence &amp; Storage"]
+        DB1["SQLite Database (promptshield.db)"]
+        FS1["Exported Reports (docs/reports/*.pdf)"]
+        FS2["Test Artifacts (test-data/*)"]
+    end
+
+    FrontendLayer <-->|REST API / JSON| APILayer
+    APILayer --> ServiceLayer
+    ServiceLayer <--> ModelAdapters
+    ServiceLayer <--> PersistenceLayer

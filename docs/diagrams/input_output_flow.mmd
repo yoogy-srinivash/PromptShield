@@ -1,0 +1,26 @@
+graph LR
+    subgraph Inputs ["Inputs"]
+        I1["System Prompt"]
+        I2["Domain &amp; Rules"]
+        I3["Canary Secret Marker"]
+        I4["Target Model Config"]
+    end
+
+    subgraph CoreEngine ["PromptShield Pipeline"]
+        CE1["P1 Adversarial Generator"]
+        CE2["Target Execution Engine"]
+        CE3["P2 Hybrid Evaluator"]
+        CE4["P3 Guardrail Optimizer"]
+    end
+
+    subgraph Outputs ["Outputs"]
+        O1["12 Adversarial Test Records"]
+        O2["True Model Responses &amp; Latency"]
+        O3["PASS / FAIL / Evidence Excerpts"]
+        O4["Hardened Prompt &amp; Unified Diff"]
+        O5["ASR Reduction Metrics (70% &rarr; 0%)"]
+        O6["Printable PDF &amp; CSV Audit Reports"]
+    end
+
+    Inputs --> CoreEngine
+    CoreEngine --> Outputs

@@ -1,0 +1,101 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 900 500" width="100%" height="100%">
+  <defs>
+    <style>
+      .layer { fill: #ffffff; stroke: #cbd5e1; stroke-width: 1.5; rx: 8; }
+      .layer-title { font-family: Inter, sans-serif; font-size: 13px; font-weight: 700; fill: #0f172a; }
+      .comp { fill: #f8fafc; stroke: #94a3b8; stroke-width: 1; rx: 5; }
+      .comp-accent { fill: #f0fdfa; stroke: #0d9488; stroke-width: 1.5; rx: 5; }
+      .comp-text { font-family: Inter, sans-serif; font-size: 11px; font-weight: 600; fill: #1e293b; text-anchor: middle; }
+      .sub-text { font-family: Inter, sans-serif; font-size: 9px; fill: #64748b; text-anchor: middle; }
+      .bus { stroke: #0d9488; stroke-width: 2; fill: none; stroke-dasharray: 4,4; }
+    </style>
+  </defs>
+  <rect width="100%" height="100%" fill="#f8fafc" />
+
+  <!-- Presentation Layer -->
+  <rect x="30" y="20" width="840" height="95" class="layer" />
+  <text x="50" y="45" class="layer-title">Presentation Layer (React 18 + TypeScript + Vite + Tailwind CSS)</text>
+  <rect x="50" y="55" width="150" height="45" class="comp" />
+  <text x="125" y="75" class="comp-text">Dashboard &amp; Metrics</text>
+  <text x="125" y="90" class="sub-text">ASR &amp; Category Bars</text>
+
+  <rect x="220" y="55" width="150" height="45" class="comp" />
+  <text x="295" y="75" class="comp-text">Prompt Workspace</text>
+  <text x="295" y="90" class="sub-text">Domain &amp; Canary Config</text>
+
+  <rect x="390" y="55" width="150" height="45" class="comp" />
+  <text x="465" y="75" class="comp-text">Test Suite Inspector</text>
+  <text x="465" y="90" class="sub-text">12 Vectors &amp; Types</text>
+
+  <rect x="560" y="55" width="140" height="45" class="comp" />
+  <text x="630" y="75" class="comp-text">Evaluator &amp; Diff</text>
+  <text x="630" y="90" class="sub-text">Evidence Quotation</text>
+
+  <rect x="715" y="55" width="135" height="45" class="comp" />
+  <text x="782" y="75" class="comp-text">Export &amp; History</text>
+  <text x="782" y="90" class="sub-text">PDF / CSV / JSON</text>
+
+  <!-- API Layer -->
+  <rect x="30" y="140" width="840" height="90" class="layer" />
+  <text x="50" y="165" class="layer-title">API Gateway Layer (FastAPI + Pydantic v2)</text>
+  <rect x="50" y="175" width="180" height="40" class="comp" />
+  <text x="140" y="195" class="comp-text">/api/generate-tests</text>
+  <text x="140" y="208" class="sub-text">Module C Endpoint</text>
+
+  <rect x="250" y="175" width="180" height="40" class="comp" />
+  <text x="340" y="195" class="comp-text">/api/execute-and-evaluate</text>
+  <text x="340" y="208" class="sub-text">Modules D &amp; E Pipeline</text>
+
+  <rect x="450" y="175" width="180" height="40" class="comp" />
+  <text x="540" y="195" class="comp-text">/api/harden-prompt &amp; compare</text>
+  <text x="540" y="208" class="sub-text">Modules F &amp; G Optimization</text>
+
+  <rect x="650" y="175" width="200" height="40" class="comp" />
+  <text x="750" y="195" class="comp-text">/api/demo/run &amp; export/*</text>
+  <text x="750" y="208" class="sub-text">Modules H &amp; I Reporting</text>
+
+  <!-- Service Layer -->
+  <rect x="30" y="255" width="840" height="105" class="layer" />
+  <text x="50" y="280" class="layer-title">Core Prompt Engineering &amp; Evaluation Services</text>
+  <rect x="50" y="295" width="180" height="50" class="comp-accent" />
+  <text x="140" y="318" class="comp-text">P1 Generator (v3)</text>
+  <text x="140" y="333" class="sub-text">9 Multi-Category Vectors</text>
+
+  <rect x="250" y="295" width="180" height="50" class="comp-accent" />
+  <text x="340" y="318" class="comp-text">Target LLM Executor</text>
+  <text x="340" y="333" class="sub-text">Latency &amp; Token Recorder</text>
+
+  <rect x="450" y="295" width="180" height="50" class="comp-accent" />
+  <text x="540" y="318" class="comp-text">P2 Hybrid Evaluator (v3)</text>
+  <text x="540" y="333" class="sub-text">Canary Match + LLM Judge</text>
+
+  <rect x="650" y="295" width="200" height="50" class="comp-accent" />
+  <text x="750" y="318" class="comp-text">P3 Guardrail Optimizer (v3)</text>
+  <text x="750" y="333" class="sub-text">Hierarchy &amp; Boundary Tags</text>
+
+  <!-- Infrastructure Layer -->
+  <rect x="30" y="385" width="400" height="95" class="layer" />
+  <text x="50" y="410" class="layer-title">Model Adapters Layer</text>
+  <rect x="50" y="420" width="100" height="45" class="comp" />
+  <text x="100" y="440" class="comp-text">Gemini 2.5</text>
+  <text x="100" y="455" class="sub-text">REST API</text>
+
+  <rect x="160" y="420" width="100" height="45" class="comp" />
+  <text x="210" y="440" class="comp-text">OpenAI</text>
+  <text x="210" y="455" class="sub-text">gpt-4o-mini</text>
+
+  <rect x="270" y="420" width="140" height="45" class="comp" />
+  <text x="340" y="440" class="comp-text">Ollama / Fixture</text>
+  <text x="340" y="455" class="sub-text">Llama 3.2 / Offline</text>
+
+  <!-- Persistence Layer -->
+  <rect x="470" y="385" width="400" height="95" class="layer" />
+  <text x="490" y="410" class="layer-title">Storage &amp; Export Engine</text>
+  <rect x="490" y="420" width="170" height="45" class="comp" />
+  <text x="575" y="440" class="comp-text">SQLite Persistence</text>
+  <text x="575" y="455" class="sub-text">promptshield.db</text>
+
+  <rect x="680" y="420" width="170" height="45" class="comp" />
+  <text x="765" y="440" class="comp-text">ReportLab Engine</text>
+  <text x="765" y="455" class="sub-text">PDF, CSV, JSON Reports</text>
+</svg>

@@ -1,0 +1,27 @@
+graph TD
+    Root["PromptShield (C23 Red-Team Kit)"] --> M1["Module A: Security Dashboard"]
+    Root --> M2["Module B: System Prompt Workspace"]
+    Root --> M3["Module C: Red-Team Generator"]
+    Root --> M4["Module D: Target LLM Execution"]
+    Root --> M5["Module E: Response Evaluator"]
+    Root --> M6["Module F: Guardrail Optimizer"]
+    Root --> M7["Module G: Comparative Benchmark"]
+    Root --> M8["Module H: Reporting & Persistence"]
+    Root --> M9["Module I: Built-in Evaluator Demo"]
+
+    M2 --> M2_1["Policy Boundaries & Rules"]
+    M2 --> M2_2["Canary Secret Config"]
+    M2 --> M2_3["Industry Templates"]
+
+    M3 --> M3_1["P1 Prompt Engine (v3)"]
+    M3 --> M3_2["9 Attack Categories"]
+    M3 --> M3_3["Test Types (Normal/Edge/Invalid)"]
+
+    M5 --> M5_1["Exact Canary Substring Detector"]
+    M5 --> M5_2["Prohibited Action Signatures"]
+    M5 --> M5_3["Over-Refusal Filter on Benign Queries"]
+    M5 --> M5_4["Evidence Quotation & Rationale"]
+
+    M6 --> M6_1["Instruction Hierarchy Injection"]
+    M6 --> M6_2["Untrusted Data &lt;user_input&gt; Encapsulation"]
+    M6 --> M6_3["Unified Diff Generator"]

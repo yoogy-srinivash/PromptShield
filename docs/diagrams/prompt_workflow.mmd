@@ -1,0 +1,12 @@
+graph TD
+    A["Target Chatbot Specification<br/>(Domain, System Prompt, Canary Secret)"] --> B["Prompt P1: Adversarial Generator (v3)"]
+    B --> C["12 Balanced Adversarial Test Vectors<br/>(9 Attack Categories + Benign Controls)"]
+    C --> D["Target Model Execution<br/>(System Prompt Applied + Latency Measured)"]
+    D --> E["Raw Chatbot Responses"]
+    E --> F["Prompt P2: Response Security Evaluator (v3)<br/>(Deterministic Canary Match + LLM Judge)"]
+    F --> G{"Security Verdict<br/>PASS / FAIL / INCONCLUSIVE"}
+    G -->|Vulnerabilities Detected| H["Prompt P3: Guardrail Optimizer (v3)<br/>(Instruction Hierarchy & Boundary Tags)"]
+    G -->|Compliant| I["Security Baseline Logged"]
+    H --> J["Hardened System Prompt"]
+    J --> K["Module G: Comparative Re-testing<br/>(Identical 12 Vectors on Hardened Prompt)"]
+    K --> L["Final Security Audit Report & PDF Export"]
