@@ -45,7 +45,7 @@
 `http://localhost:8000` *(Local deployed container; public URL unverified until cloud hosted by student team)*
 
 ### Q12. Repository or Folder Link
-`[UNVERIFIED REPOSITORY URL — Pending Public Push by Team]` *(Local git repository initialized and tracked)*
+`https://github.com/yoogy-srinivash/PromptShield.git` *(Public GitHub Repository)*
 
 ### Q13. Reel Link
 `[UNVERIFIED REEL URL — Pending Video Upload by Team]` *(Script prepared in docs/submission/REEL_SCRIPT.md)*

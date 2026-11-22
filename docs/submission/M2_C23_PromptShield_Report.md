@@ -22,7 +22,7 @@
   - Member 4: [NEEDS REAL NAME 4] — Enrollment: `[NEEDS ENROLLMENT S24CSEUXXXX]`
 - **The Three Links (Form Q11, Q12, Q13):**
   - **Prototype Link (Q11):** `http://localhost:8000` *(Local deployed container; public URL unverified until cloud hosted by student team)*
-  - **GitHub Repository / Folder Link (Q12):** `[UNVERIFIED REPOSITORY URL — Pending Public Push by Team]` *(Local directory structure fully initialized at `d:\PromptSheild`)*
+  - **GitHub Repository / Folder Link (Q12):** [https://github.com/yoogy-srinivash/PromptShield.git](https://github.com/yoogy-srinivash/PromptShield.git) *(Public GitHub Repository)*
   - **Demo Reel Link (Q13):** `[UNVERIFIED REEL URL — Pending Upload by Team]` · **Exact Duration (Q14):** 115 seconds (Script prepared in `docs/submission/REEL_SCRIPT.md`)
 
 ---

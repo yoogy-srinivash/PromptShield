@@ -173,7 +173,7 @@ def build_pdf_reports():
         [Paragraph("<b>Faculty Guide:</b>", table_cell), Paragraph("[NEEDS FACULTY NAME]", table_cell)],
         [Paragraph("<b>Members:</b>", table_cell), Paragraph("[NEEDS REAL NAMES AND ENROLLMENT NUMBERS S24CSEUXXXX]", table_cell)],
         [Paragraph("<b>Prototype Link (Q11):</b>", table_cell), Paragraph("http://localhost:8000 (Local Verified)", table_cell)],
-        [Paragraph("<b>Repository Link (Q12):</b>", table_cell), Paragraph("[UNVERIFIED REPOSITORY URL — Local d:/PromptSheild]", table_cell)],
+        [Paragraph("<b>Repository Link (Q12):</b>", table_cell), Paragraph("https://github.com/yoogy-srinivash/PromptShield.git", table_cell)],
         [Paragraph("<b>Reel Link (Q13):</b>", table_cell), Paragraph("[UNVERIFIED REEL URL] (Exact Length: 115 Seconds)", table_cell)]
     ]
     ct = Table(cover_data, colWidths=[160, 380])
