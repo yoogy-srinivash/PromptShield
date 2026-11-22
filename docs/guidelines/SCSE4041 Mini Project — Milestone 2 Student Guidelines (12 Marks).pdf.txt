@@ -1,0 +1,328 @@
+
+--- PAGE 1 ---
+SCSE4041 Mini Project — Milestone 2 
+Student Guidelines
+Nov 16, 2026  ·  @Sonal
+Key facts
+The form title says 20 November. The deadline has been extended to 22 November 2026.
+If an evaluator cannot open a link or a file, that part gets 0 marks. Test every link in a
+private/incognito window before submitting.
+Keep these ready before opening the form
+Keep everything below ready first, then fill the form in one sitting. A half-filled form may
+not be saved.
+Item Details
+Marks 12 (part of the 30-mark Mini Project)
+Deadline Sunday, 22 November 2026, 11:59 PM. Late
+submissions are not accepted.
+Who submits Team leader only, once for the whole team. Do not
+submit more than one form per team.
+What is submitted The Microsoft Form with: 2 PDFs (Milestone 2 PDF
+and Supporting document) + 3 links (prototype,
+repository/folder, reel)
+Team ID Use the Team ID given to your team after Milestone
+1. Do not make a new one.
+Team ID, team name (as in Milestone 1), project title
+Enrollment numbers of all members, format S24CSEU1234
+Milestone 2 PDF, named M2_TeamID_ProjectTitle.pdf (for example
+M2_T23_InterviewPrepAssistant.pdf), max 10 MB
+Supporting document PDF, named TeamName_DocumentType.pdf (for example
+CodeCrafters_BMC.pdf), max 10 MB
+SCSE4041 Mini Project — Milestone 2 Student Guidelines
+Page 1 of 9
+--- PAGE 2 ---
+Milestone 2 PDF (upload at Q21)
+Use these 7 sections, in this order, with these headings. Evaluators mark section by
+section, so a missing or misplaced section may get no marks.
+Prototype link
+GitHub repository or Drive/OneDrive folder link
+Reel link (Drive or unlisted YouTube) and its exact length in seconds
+Three counts: number of final prompts, number of test inputs, number of prompt
+versions
+List of working modules
+One line per member: enrollment number – name – main task
+Agreement of all members on the contribution table (Section 7 of the PDF)
+Section Heading What it must contain
+1 Cover page Team ID, team name, project title, batch, faculty
+name, all members with enrollment numbers, and
+the 3 links
+2 Prompt and solution design (a) Half to one page answering: what problem, for
+whom; input and output; how many prompts/steps
+and why; which tool/model and why; what changed
+since Milestone 1. (b) Diagrams: prompt workflow,
+task decomposition, input–output flow, plus one of
+system architecture (app/automation) or screen
+flow (no-code). Add an agent loop or RAG pipeline
+diagram if you use agents or retrieval. (c) One
+prompt sheet per final prompt (format below).
+3 Implementation What is built; a module status table (Module · What
+it does · Status: Working / Partly working / Not
+started · Notes); the prompt iteration log (at least 3
+versions)
+4 Demonstration and testing Test table (at least 10 inputs, at least 3 edge cases);
+2–3 screenshots of real runs, each captioned with
+its test number; 2–4 known limitations with what
+you will try next
+SCSE4041 Mini Project — Milestone 2 Student Guidelines
+Page 2 of 9
+--- PAGE 3 ---
+Prompt sheet (Section 2)
+Paste prompts as text, not screenshots. For each final prompt write: Prompt ID and name ·
+Step in the workflow · Purpose (one line) · Tool and model · Settings (temperature etc., or
+"default") · Full system prompt (or "none") · Full user prompt template with variables in
+curly brackets, such as {question} · What each variable holds · Number of examples
+included · Output format · One sample run (real input and actual output).
+Prompt iteration log (Section 3)
+Paste the full text of each version below the table. The result column must say what you
+observed, with numbers where possible. "It got better" is not enough.
+Test table (Section 4)
+Section Heading What it must contain
+5 Repository One screenshot of the repository/folder and 3–5
+lines on what changed since Milestone 1
+6 Supporting document The same document you upload at Q16
+7 Team contribution Contribution table (format below)
+Version What changed Why it was
+changed
+Result after the change
+v1 First prompt: "Evaluate this
+answer"
+Starting point Feedback vague; scores
+varied between runs
+v2 Added rubric and JSON
+output format
+Scores were
+inconsistent
+Same answer, same score;
+JSON broke 3 times in 10 runs
+v3 Added 2 graded examples,
+temperature 0.2
+JSON still broke JSON valid in 10 out of 10 runs
+Test
+no.
+Input (short) Type Expected output Actual output (short) Pass /
+Fail
+1 Job role: Data analyst Normal 5 SQL and Excel
+questions
+5 questions, 4 on SQL Pass
+SCSE4041 Mini Project — Milestone 2 Student Guidelines
+Page 3 of 9
+--- PAGE 4 ---
+Type must be Normal, Edge or Invalid. Failed tests are fine; hiding failures is not. A table
+with all passes and no edge cases gets lower marks than an honest one.
+Contribution table (Section 7)
+Every member must own at least one specific task. "Helped with everything" is not
+accepted.
+Evidence = a file, commit, prompt ID or PDF section that shows the work.
+Percentages must add up to 100.
+Faculty may ask any member to explain the part they claim. A member with no task or
+no evidence may get reduced or zero marks.
+Supporting document (select at Q15, upload at Q16)
+Choose one type. It must be about your project, not a general topic, and 1–2 pages long.
+Upload it as a separate PDF named TeamName_DocumentType.pdf, and also put it in
+Section 6 of the Milestone 2 PDF.
+Test
+no.
+Input (short) Type Expected output Actual output (short) Pass /
+Fail
+7 Answer typed in
+Hinglish
+Edge Feedback in English Feedback in Hinglish Fail
+9 Answer: "idk" Invalid Score 0, ask to try again Score 2, generic
+praise
+Fail
+Member
+name
+Enrollment
+no.
+Role Tasks done in
+Milestone 2
+Evidence Contribution
+(%)
+Riya
+Sharma
+S24CSEU1234 Prompt
+design
+Wrote P2 and P3,
+made v1–v3 of P3
+prompts/final/P3.txt, 6
+commits
+25
+SCSE4041 Mini Project — Milestone 2 Student Guidelines
+Page 4 of 9
+--- PAGE 5 ---
+The three links
+Prototype link (Q11)
+One link where the evaluator can open and try your solution: a shared Opal app, custom
+GPT, Gemini Gem, a shared Google AI Studio prompt, a deployed app (Streamlit, Gradio,
+Hugging Face, Vercel, Netlify), or an automation flow (n8n, Make, Zapier). If none of these
+is possible, share a Colab notebook with outputs saved. A normal Google or ChatGPT
+login is fine, but the evaluator must not have to request access. If your app needs a test
+account, give the login in Q23.
+Type Choose it if Must contain
+Business Model
+Canvas (BMC)
+Your project could be a product
+or startup
+One page with all 9 blocks filled
+for your project: customer
+segments, value proposition,
+channels, customer
+relationships, revenue streams,
+key resources, key activities, key
+partners, cost structure.
+Template
+Research abstract You compared techniques or
+tested something new
+150–250 words covering problem,
+method, results (with numbers),
+conclusion
+Technical report You want to explain how it is
+built
+Architecture, tools and models
+used, prompt design, test
+results, limitations
+Patent idea note You think your method is
+original
+The problem, what is new, how it
+works, how it differs from
+existing tools you checked
+Synopsis You want a short project
+summary
+Objectives, scope, methodology,
+expected outcome
+SCSE4041 Mini Project — Milestone 2 Student Guidelines
+Page 5 of 9
+--- PAGE 6 ---
+Repository or project folder (Q12)
+A public GitHub repository, or a Google Drive / OneDrive folder set to "Anyone with the
+link can view". Use this structure:
+README.md      What the project does, how to open/run it, team members, 
+prototype link
+prompts/
+   v1/, v2/, v3/   Older prompt versions, one .txt or .md file per prompt
+   final/          Final prompts, one file per prompt
+code/          Code, notebooks or exported flows (if any)
+test-data/     Inputs used in the test table, and saved outputs
+docs/          Diagrams and the Milestone 2 PDF
+CHANGELOG.md   Dated list of changes since Milestone 1
+No-code teams still keep prompts/, test-data/ and docs/.
+Show progress since Milestone 1: GitHub commits with dates, or dated entries in
+CHANGELOG.md.
+Never upload API keys or passwords. A visible API key means 0 for the repository
+part.
+Reel (Q13, Q14)
+Length 90–150 seconds. Upload to Google Drive or YouTube (unlisted), set to "Anyone
+with the link can view". Do not attach the video file to the form. Follow this order:
+Screen recording with a teammate's voice-over or captions. Faces are optional. Vertical or
+horizontal both work. The demo must be a real run; mock-up screens get 0 for the demo
+part.
+Part Time What to show
+1. Problem ~10 s Who the solution is for and what it solves
+2. Prompt experiment ~30–40 s One before-and-after: old prompt and its output,
+then the improved prompt and its output
+3. Working demo ~40–60
+s
+Screen recording of the solution running on a real
+input
+4. Progress and next
+steps
+~15–20 s What is done, what is planned for Milestone 3
+SCSE4041 Mini Project — Milestone 2 Student Guidelines
+Page 6 of 9
+--- PAGE 7 ---
+How to count (Q10, Q17, Q18, Q19)
+Every number you enter must match your PDF. Evaluators check this, and a mismatch
+loses marks.
+For Q20, list only modules marked Working in your status table, one per line, using the
+same names. Evaluators will test every module you claim.
+Filling the form: question by question
+Form question What counts as one What does not count
+Q10 Number of prompts
+(1–50)
+One prompt sheet in Section
+2: each distinct prompt or
+LLM call your final solution
+uses
+Old versions of a prompt; the
+same prompt reused with
+different inputs
+Q17 Number of test
+inputs (minimum 10)
+One row in the test table with
+an input, expected output,
+actual output and Pass/Fail
+Blank rows, repeated inputs
+Q18 Number of prompt
+versions (minimum 3)
+One saved version in the
+iteration log where you
+changed something on
+purpose (role, context,
+format, examples,
+constraints, settings) and
+wrote why. Count v1 and the
+final version.
+Typo fixes, unsaved
+experiments
+Q19 Prototype status "All modules working" only if
+every module in your status
+table is Working
+—
+Q Question What to enter
+1 Team ID The ID given after Milestone 1
+2 Team name Exactly as in Milestone 1
+3 Project title Same title as on your PDF cover page
+SCSE4041 Mini Project — Milestone 2 Student Guidelines
+Page 7 of 9
+--- PAGE 8 ---
+Q Question What to enter
+4–5 Team leader name and enrollment
+no.
+Format S24CSEU1234
+6 Group (batch) Your WhatsApp batch group, for example B13-24
+7 Enrollment numbers of all
+members
+One per line, leader included
+8 Project type At most 2 options
+9 Main AI tool and model Tool and model, for example "Gemini 2.5 Flash in
+Google AI Studio"
+10 Number of prompts See "How to count"
+11 Prototype link See "The three links"
+12 Repository or folder link See "The three links"
+13 Reel link Drive or unlisted YouTube
+14 Reel length Exact seconds, between 90 and 150
+15 Supporting document type One of the five types
+16 Upload supporting document TeamName_DocumentType.pdf, max 10 MB
+17 Number of test inputs Same as the rows in your test table
+18 Number of prompt versions Same as the versions in your iteration log
+19 Prototype status All / Some / Only one module working
+20 Names of working modules One per line, same names as your status table
+21 Upload Milestone 2 PDF M2_TeamID_ProjectTitle.pdf, max 10 MB
+22 Main task of each member One line per member: S24CSEU1234 – Name –
+Task. Must match Section 7.
+23 Anything the evaluator should
+know
+Optional. Test account login, or how to run the
+app
+24 Confirmation Tick only after all members have agreed to the
+contribution table
+SCSE4041 Mini Project — Milestone 2 Student Guidelines
+Page 8 of 9
+--- PAGE 9 ---
+Only one form per team. If you made a mistake after submitting, inform your faculty
+before the deadline. Do not submit a second form.
+Common mistakes that lose marks
+A link that asks the evaluator to request access
+Prompts pasted as screenshots instead of text
+Diagrams copied from the internet, or not matching what you built
+Only one prompt version, or an iteration log with no observed results
+A test table where every test passes and there are no edge cases
+Numbers in the form that do not match the PDF
+Claiming modules as working that do not work
+API keys visible in code or config files
+No commits or changelog entries after Milestone 1
+A reel shorter than 90 or longer than 150 seconds, or one that shows only slides
+PDF sections out of order or missing headings
+More than one form submitted by the same team
+For any doubt, ask your faculty before 20 November so there is time to fix it.
+SCSE4041 Mini Project — Milestone 2 Student Guidelines
+Page 9 of 9

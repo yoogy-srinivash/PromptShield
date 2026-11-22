@@ -1,0 +1,1195 @@
+
+--- PAGE 1 ---
+BENNETT UNIVERSITY  |  PROMPT ENGINEERING 
+1 
+BENNETT UNIVERSITY 
+PROMPT ENGINEERING 
+B.Tech 5th Semester 
+MINI-PROJECT GUIDELINES, MILESTONES & ASSESSMENT  
+Prompt Engineering — Applied AI Mini-Project 
+Total Assessment: 30 Marks 
+Team Size 2–6 students 
+Milestone 1 Deadline 11 October 2026 — 8 Marks 
+Milestone 2 Deadline 2 November 2026 — 12 Marks 
+Milestone 3 Deadline 1 December 2026 — 10 Marks 
+ 
+Student & Faculty Reference Document 
+  
+--- PAGE 2 ---
+BENNETT UNIVERSITY  |  PROMPT ENGINEERING 
+2 
+1. Introduction 
+The Mini -Project is a 30 -mark applied -learning component of the Prompt Engineering course for B.Tech 5th 
+Semester. The project is intended to move students from prompt concepts and experimentation to the design, 
+testing, evaluation and demonstration of a useful prompt -engineering solution. Teams are expected to identify a 
+meaningful problem or use case, develop prompt strategies and workflows, evaluate outputs systematically, 
+document iterations and demonstrate a working solution. 
+The prescribed Problem Pool/Bank is retained as a common source of real -world problem statements. For this 
+course, students should reinterpret a selected problem through a Prompt Engineering lens: define the user/task 
+context, identify where generative AI or language-model interaction can add value, design prompts and workflows, 
+establish evaluation criteria, and demonstrate reliable and responsible outputs. 
+2. Mini-Project Objectives 
+• Translate a real-world problem into a well-defined AI/prompt-engineering task. 
+• Design effective prompts using appropriate prompt structures, instructions, context, constraints, examples 
+and output specifications. 
+• Experiment with prompt variants and document an iterative prompt-development process. 
+• Use structured evaluation criteria to assess relevance, correctness, consistency, completeness, safety and 
+usefulness of outputs, as appropriate to the project. 
+• Design prompt workflows that may include multi -step prompting, role/task decomposition, structured 
+outputs, retrieval/context injection or tool-assisted workflows where relevant. 
+• Demonstrate responsible use of generative AI, including privacy, b ias, hallucination, safety, copyright and 
+human-oversight considerations where relevant. 
+• Communicate the technical design, results, limitations and practical value of the project. 
+• Ensure meaningful and assessable contribution by every team member. 
+3. Team Formation and Working Rules 
+• Each Mini-Project team shall consist of 3–5 students. 
+• One member may be designated as Team Leader/Coordinator for submission and communication purposes. 
+• Each team shall work on one project/problem. 
+• Every team member must have a defined role and contribute to research, prompt design, experimentation, 
+evaluation, implementation, documentation or communication. 
+• The final presentation/viva-voce must include participation from each team member. 
+• Teams should maintain evidence of indivi dual contribution, including prompt iterations, experiment logs, 
+evaluation sheets, repository/version history, design work, documentation and presentation material. 
+4. Project / Problem Selection 
+Students may select their Mini-Project through either of the following routes. 
+4.1 Select a Problem from the Prescribed Problem Pool 
+The complete Problem Pool attached as Appendix A is provided as a student-help resource. Teams may select one 
+problem statement from the pool and develop a Prompt Engineering solutio n around it. The selected problem 
+--- PAGE 3 ---
+BENNETT UNIVERSITY  |  PROMPT ENGINEERING 
+3 
+should not be treated as a copy -paste assignment; the team must define its own prompt -engineering task, 
+workflow, evaluation approach and prototype. 
+• Identify the core user/problem context. 
+• Define the specific task that a prompt-engineering solution will address. 
+• Identify inputs, context and expected outputs. 
+• Design and refine prompts through multiple experiments. 
+• Compare prompt variants and document the reasoning for changes. 
+• Define measurable evaluation criteria and test cases. 
+• Demonstrate the final prompt/workflow with representative examples. 
+4.2 Propose a Self-Defined Problem 
+Teams may propose their own suitable problem or use case for Prompt Engineering. The problem should be 
+meaningful, feasible within the project period, supported by evidence or a clear use-case rationale, and approved 
+by the concerned faculty member. 
+Note: A self -defined project requires faculty approval before the team proceeds with it as the assessed Mini -
+Project. 
+4.3 Prompt Engineering Project Principles 
+Criterion Expectation 
+Problem clarity The project clearly defines the user, task, context and 
+intended outcome. 
+Prompt quality Prompts use appropriate instructions, context, 
+constraints, examples and output specifications. 
+Iteration The team documents prompt versions, experiments 
+and improvements rather than presenting only a final 
+prompt. 
+Evaluation Outputs are evaluated using explicit criteria, test 
+cases, rubrics or comparison methods appropriate to 
+the task. 
+Reliability & limitations The team identifies failure cases, ambiguity, 
+hallucination risks or other relevant limitations. 
+Responsible AI Relevant privacy, bias, safety, copyright, security and 
+human-oversight considerations are addressed. 
+Reproducibility Another person should be able to understand and 
+reproduce the core prompt/workflow and evaluation 
+process. 
+5. Prompt Engineering Skills to be Demonstrated 
+Depending on the selected project, students should demonstrate relevant skills from the following areas: 
+• Task decomposition and problem formulation for language-model-based systems. 
+• Clear instruction writing and prompt structuring. 
+• Role/context specification and audience-aware prompting. 
+• Few-shot and example-based prompting where appropriate. 
+• Constraint-based prompting and output-format specification. 
+• Structured outputs such as JSON, tables, schemas or other machine-readable formats where appropriate. 
+--- PAGE 4 ---
+BENNETT UNIVERSITY  |  PROMPT ENGINEERING 
+4 
+• Prompt chaining and multi-step workflows for complex tasks. 
+• Prompt comparison, A/B experimentation and iterative refinement. 
+• Context management and grounding using provided documents/data where appropriate. 
+• Evaluation design: test sets, rubrics, accuracy/relevance/consistency checks and human evaluation. 
+• Error analysis and prompt failure diagnosis. 
+• Hallucination and factuality mitigation strategies appropriate to the use case. 
+• Responsible and safe prompt design, including privacy and sensitive-data handling. 
+• Documentation and version control of prompts, workflows and experiments. 
+• Clear communication of limitations and appropriate human oversight. 
+6. Suggested Prompt Engineering Project Workflow 
+Stage Expected Work 
+1. Problem Definition Define the user, problem, context, inputs, desired 
+outputs and success criteria. 
+2. Prompt Task Design Translate the problem into one or more prompt -
+engineering tasks. 
+3. Baseline Prompt Create an initial prompt and record representative 
+outputs. 
+4. Prompt Iteration Experiment with instructions, context, examples, 
+constraints and workflow structure. 
+5. Evaluation Test prompt versions against a defined test set or 
+evaluation rubric. 
+6. Error Analysis Identify failure cases, inconsistent outputs, 
+hallucinations, ambiguity or other weaknesses. 
+7. Refinement Improve the prompt/workflow based on evidence from 
+testing. 
+8. Prototype / Integration Demonstrate the prompt as part of a useful 
+application, workflow or interface where feasible. 
+9. Responsible-Use Review Check privacy, safety, bias, copyright, security and 
+human-oversight considerations. 
+10. Final Demonstration Present the problem, prompt strategy, evidence, 
+results, limitations and working demonstration. 
+7. Academic Integrity, Originality and Responsible AI Use 
+• Students must acknowledge external sources, datasets, models, tools, APIs, documents and references used. 
+• The selected Problem Pool statement may be the starting point, but the team's prompt design, experiments, 
+evaluation, prototype and documentation must be its own work. 
+• Prompt outputs must not be presented as fa ctual evidence without appropriate verification when factual 
+accuracy matters. 
+• Students must not fabricate evaluation results, user feedback, testing evidence or implementation claims. 
+• Sensitive or personal information should not be entered into AI systems  unless its use is explicitly permitted 
+and appropriately protected. 
+• Teams should document significant AI -assisted development where required by faculty/course instructions 
+and remain responsible for the submitted work. 
+--- PAGE 5 ---
+BENNETT UNIVERSITY  |  PROMPT ENGINEERING 
+5 
+8. Project Timeline and Milestone Deadlines 
+The project progresses through three assessed milestones. Teams are expected to work continuously between 
+milestones and maintain evidence of prompt development, experimentation, evaluation and implementation. 
+Milestone Project Stage Working Period Submission 
+Deadline 
+Marks 
+Milestone 1 Problem 
+Identification, Use -
+Case Definition & 
+Prompt Proposal 
+Project start → 11 
+Oct 2026 
+11 October 2026 8 
+Milestone 2 Prompt Design, 
+Experimentation, 
+Implementation & 
+Demonstration 
+10 Oct → 2 Nov 2026 2 November 2026 12 
+Milestone 3 Final Solution, 
+Evaluation, 
+Documentation & 
+Presentation 
+3 Nov → 1 Dec 2026 1 December 2026 10 
+9. Milestone 1 — Problem Identification, Use -Case & Prompt Proposal (8 
+Marks) 
+Working period: Project commencement to 9 October 2026. 
+Component Marks Expected Evidence / Content 
+Project Title / Prompt -Engineering 
+Use Case 
+1.0 Clear project title and concise 
+description of the AI/prompt -
+engineering use case. 
+Problem & User Context 1.0 Problem, users, context, inputs and 
+desired outcome are clearly 
+defined. 
+Reason for Selection 0.5 Why the problem/use case was 
+selected and why prompt 
+engineering is relevant. 
+Target Users / Stakeholders 0.5 Users, beneficiaries, customers or 
+stakeholders. 
+Prompt Engineering Task Definition 1.0 Specific task(s) the 
+prompt/workflow will perform; 
+expected inputs and outputs. 
+Technology / Model / Tool Approach 0.5 Initial model/tool/interface 
+approach and rationale. 
+Existing Solutions / Gap 1.0 Comparable solutions or workflows 
+and identified gap/opportunity. 
+Research / Evidence 1.0 Literature, data, user evidence, 
+domain references or credible 
+sources. 
+Initial Prompt / Workflow Concept 0.5 Baseline prompt or initial workflow 
+with representative expected 
+output. 
+Industry / Faculty / Senior Feedback 1.0 Feedback from relevant 
+professional/faculty/senior student 
+--- PAGE 6 ---
+BENNETT UNIVERSITY  |  PROMPT ENGINEERING 
+6 
+Component Marks Expected Evidence / Content 
+discussions and how it informs the 
+project. 
+Deadline: 9 October 2026 
+10. Milestone 2 — Prompt Design, Experimentation, Implementation & 
+Demonstration (12 Marks) 
+Working period: 10 October 2026 to 2 November 2026. 
+Component Marks Expected Evidence / Content 
+Prompt / Solution Design 
+Description and Diagrams 
+2.0 Prompt architecture/workflow, task 
+decomposition, input -output flow, 
+interface or system diagrams as 
+appropriate. 
+Running / Partial Build / 
+Implementation 
+3.0 Working prompt workflow, 
+prototype, application, automation 
+or integration demonstrating 
+meaningful implementation. 
+Demonstration / Pilot Run / Live 
+Deployment of Modules 
+2.0 Pilot/testing/demo of available 
+modules with representative inputs 
+and outputs. 
+Updated Project Git Repository / 
+Source Files Drive Folder 
+2.0 Updated prompts, code, 
+configuration, test 
+data/instructions and source files 
+with evidence of progress. 
+BMC / Patent / Research Paper / 
+Technical Report / Synopsis / 
+Abstract 
+1.0 One appropriate business, 
+research, technical or innovation 
+document adapted to the project. 
+90–150 Second Short Video / Reel 2.0 Concise visual evidence of prompt 
+experiments, working solution and 
+progress up to Milestone 2. 
+Deadline: 2 November 2026. Team presentations start in class from 3 November 2026; the schedule will be 
+shared on the LMS. 
+11. Milestone 3 — Final Solution, Evaluation, Documentation & Presentation 
+(10 Marks) 
+Working period: 3 November 2026 to 1 December 2026. 
+Component Marks Expected Evidence / Content 
+Prescribed Final Project Report 2.0 Complete report documenting 
+problem, prompt design, 
+experiments, evaluation, results, 
+limitations and responsible-use 
+considerations. 
+Organization and Structure of 
+Project Report 
+1.0 Logical structure, clear 
+prompt/workflow documentation, 
+tables/figures, test evidence, 
+references and consistency. 
+--- PAGE 7 ---
+BENNETT UNIVERSITY  |  PROMPT ENGINEERING 
+7 
+Component Marks Expected Evidence / Content 
+Presentation PPT/PDF/Creatives 1.0 Clear presentation of p roblem, 
+prompt strategy, experiments, 
+results, limitations and demo. 
+Team Presentation Viva -Voce / 
+Contribution by Each Member 
+2.0 Each member demonstrates 
+understanding of the project and 
+their contribution. 
+LinkedIn Blog Post 2.0 Public-facing project 
+communication describing the 
+problem, prompt -engineering 
+approach, development and 
+results. 
+YouTube Video/Reel — 3–5 Minutes 2.0 Complete project journey with final 
+prompt/workflow demonstration 
+and key results. 
+Deadline: 1 December 2026 
+12. Recommended Final Project Report Structure 
+Front Matter: Title page, team details, declaration/certificate if prescribed, acknowledgement, abstract/executive 
+summary and contents. 
+Chapter 1 — Introduction: Problem context, motivation, objectives, users and project scope. 
+Chapter 2 — Problem & Domain Analysis: Problem evidence, stakeholders, requirements, domain context and 
+constraints. 
+Chapter 3 — Existing Solutions & Literature: Comparable solutions, literature, prompt-engineering approaches 
+and gap analysis. 
+Chapter 4 — Prompt / Solution Design: Task definition, prompt architecture, instructions, context, examples, 
+constraints, output schema and workflow diagrams. 
+Chapter 5 — Prompt Development & Implementation: Prompt versions, experiments, model/tool configuration, 
+prototype/application implementation and integration. 
+Chapter 6 — Evaluation & Testing: Test set, evaluation criteria, rubric/metrics, comparative results, error analysis 
+and failure cases. 
+Chapter 7 — Results & Discussion: Results, i nterpretation, limitations, reliability and lessons from prompt 
+iterations. 
+Chapter 8 — Responsible AI / Impact / Business / Research Contribution: Privacy, safety, bias, copyright, 
+human oversight, sustainability/social/business/research value as applicable. 
+Chapter 9 — Conclusion & Future Scope: Key outcomes and future improvements. 
+References: All cited sources, tools, models, datasets and external materials in a consistent format. 
+Appendices: Prompt versions, test cases, evaluation sheets, sample inputs/outputs, screenshots, supporting 
+evidence and additional material. 
+--- PAGE 8 ---
+BENNETT UNIVERSITY  |  PROMPT ENGINEERING 
+8 
+13. Submission and LMS Instructions 
+• The official submission mechanism for each milestone will be communicated through the LMS. 
+• The LMS announcement will be treated as the official communication regarding submission links, forms, file 
+formats and submission timing. 
+• Students must regularly check the LMS for official instructions. 
+• Do not rely only on WhatsApp, verbal comm unication or informal group messages for official submission 
+information. 
+• Each team should retain copies of all submitted files and evidence. 
+• Where a Git repository or drive folder is required, ensure that the submitted link remains accessible to the 
+evaluating faculty. 
+14. Prompt Experimentation & Evaluation Evidence 
+• Maintain a prompt version history showing meaningful iterations. 
+• Record representative test inputs and outputs for important experiments. 
+• Define an evaluation rubric or criteria before making broad claims about improvement. 
+• Compare baseline and refined prompts where appropriate. 
+• Document failure cases and explain what was changed in response. 
+• State model/tool limitations and any assumptions that affect the results. 
+• Avoid cherry-picking only successful outputs when presenting reliability. 
+15. Evidence of Individual Contribution 
+Because contribution by each team member is assessed, teams should maintain continuous evidence of 
+individual work. For Prompt Engineering projects this may include prompt  design, test-set creation, evaluation, 
+domain research, coding, workflow design, UI development, documentation, responsible-AI review, presentation 
+and communication. 
+• Maintain a contribution log. 
+• Use Git/version history where applicable. 
+• Retain prompt versions and experiment records. 
+• Record meaningful stakeholder or faculty discussions. 
+• Ensure every member can explain the project's prompts, workflow, evaluation and limitations during viva. 
+16. Student Final Checklist 
+• ☐ Team has 3–5 members. 
+• ☐ One project/problem has been selected. 
+• ☐ If self-defined, faculty approval has been obtained. 
+• ☐ Problem and user context are clearly defined. 
+• ☐ Prompt-engineering task, inputs and outputs are documented. 
+• ☐ Relevant model/tool/technology approach is justified. 
+• ☐ Initial prompt and workflow have been documented. 
+• ☐ Prompt iterations and experiments are maintained. 
+• ☐ Evaluation criteria and test cases are defined. 
+--- PAGE 9 ---
+BENNETT UNIVERSITY  |  PROMPT ENGINEERING 
+9 
+• ☐ Responsible-AI considerations have been reviewed. 
+• ☐ Milestone 1 submitted by 9 October 2026. 
+• ☐ Milestone 2 submitted by 2 November 2026. 
+• ☐ Milestone 3 submitted by 1 December 2026. 
+• ☐ Git/source folder and prompt artefacts are updated where required. 
+• ☐ Final report follows the prescribed structure. 
+• ☐ Each member is prepared for presentation/viva. 
+• ☐ LinkedIn Blog and YouTube video are completed. 
+• ☐ External sources, models, tools, datasets and references are acknowledged. 
+17. Project Timeline at a Glance 
+Period Primary Focus Key Outputs Assessment 
+Project Start – 9 Oct 2026 Discover, define and 
+formulate 
+Problem/use case, user 
+context, research, initial 
+prompt/workflow 
+M1 — 8 marks 
+10 Oct – 2 Nov 2026 Design, experiment and 
+implement 
+Prompt iterations, 
+evaluation, 
+prototype/workflow, 
+demo, source files, 
+progress video 
+M2 — 12 marks 
+3 Nov – 1 Dec 2026 Evaluate, finalize and 
+communicate 
+Final solution, evaluation, 
+report, presentation, viva, 
+LinkedIn, final video 
+M3 — 10 marks 
+TOTAL MINI-PROJECT ASSESSMENT: 30 MARKS 
+  
+--- PAGE 10 ---
+BENNETT UNIVERSITY  |  PROMPT ENGINEERING 
+10 
+APPENDIX A — STUDENT PROJECT HELP: PROBLEM POOL 
+The Problem Pool below is provided as a common student-help resource for project selection. Students may select 
+one problem from the pool and develop a Prompt Engineering solution around it, or propose a self-defined problem 
+subject to faculty approval. 
+How to Use This Problem Pool 
+1.  The pool has three parts. Part C has problems written for this course (coding, education, documents, business). Part S ha s Smart 
+India Hackathon 2026 statements that can be solved as language -model tasks. Part G has briefs based on open data and guida nce 
+from international and government organisations. 
+2.  Select one problem and write its ID (for example C7, S3 or G12) in the Milestone 1 form. A self-defined problem is also allowed with 
+faculty approval. 
+3.  The column "Prompt engineering task" is only a starting point. Your team must define its own task, inputs, outputs, test cases and 
+evaluation criteria. 
+4.  The column "Techniques to use" lists techniques from the course that suit the problem. You may use others, but you must j ustify 
+your choice and compare prompt versions. 
+5.  Each problem should be scoped so that the prompt or prompt workflow is the main work. A large app with one simple prompt will 
+not score well. 
+6.  For health, legal and finance problems, the solution must give information and gu idance only. It must not give a diagnosis, legal 
+advice or investment advice, and it must tell the user when to consult a professional. Do not enter real personal data into a ny AI tool; 
+use made-up or public data. 
+7.  Using a Smart India Hackathon statement for this mini-project does not require registration for the hackathon. 
+Part C — Course Problems (coding, education, documents, business) 
+ID Problem Users / Source Prompt engineering task 
+(input → output) 
+Techniques to use 
+C1 Campus helpdesk assistant Students asking 
+about university 
+rules, fees, exams 
+and hostel 
+Student question + official policy 
+documents → correct answer with 
+the source section quoted 
+Document grounding 
+(RAG), refusal when 
+answer is not in the 
+document, evaluation 
+test set 
+C2 Lecture notes to study pack Students revising 
+from long notes or 
+slides 
+Lecture notes → summary, key 
+terms, practice questions with 
+answers 
+Prompt chaining, 
+structured output, 
+rubric-based 
+evaluation 
+C3 Exam question generator with 
+quality check 
+Faculty and teaching 
+assistants 
+Syllabus topic + Bloom's level → 
+questions, answer key and 
+marking scheme 
+Few-shot examples, 
+constraints, second 
+prompt as reviewer 
+C4 Code review assistant for 
+beginner programmers 
+First-year 
+programming 
+students 
+Student code → bugs, style issues 
+and hints without giving the full 
+solution 
+Role prompting, 
+constraints, 
+structured output, 
+test cases 
+C5 Bug explanation and fix 
+assistant 
+Students and junior 
+developers 
+Error message + code → cause, fix 
+and explanation in simple words 
+Chain-of-thought, 
+step-by-step output, 
+comparison of prompt 
+versions 
+--- PAGE 11 ---
+BENNETT UNIVERSITY  |  PROMPT ENGINEERING 
+11 
+ID Problem Users / Source Prompt engineering task 
+(input → output) 
+Techniques to use 
+C6 Unit test generator Developers Function or class → unit tests 
+covering normal and edge cases 
+Few-shot examples, 
+output format control, 
+checking tests by 
+running them 
+C7 Code translation between 
+languages 
+Developers moving 
+code, e.g. Java to 
+Python 
+Source code → equivalent code in 
+the target language with notes on 
+differences 
+Constraints, chaining 
+(translate, then 
+verify), test-based 
+evaluation 
+C8 Natural language to SQL Non-technical staff 
+who need reports 
+from a database 
+Question in English + table 
+schema → SQL query and a plain 
+explanation 
+Schema as context, 
+few-shot examples, 
+accuracy check on a 
+query set 
+C9 Resume feedback against a job 
+description 
+Students applying for 
+placements 
+Resume + job description → gap 
+list, rewritten bullet points, match 
+score with reasons 
+Role prompting, 
+rubric in the prompt, 
+structured output 
+C10 Mock interview question and 
+feedback tool 
+Students preparing 
+for placement 
+interviews 
+Job role + student answer → 
+follow-up question and feedback 
+on the answer 
+Multi-turn prompt 
+design, rubric-based 
+feedback, 
+consistency testing 
+C11 Invoice and receipt data 
+extraction 
+Accounts staff in 
+small businesses 
+Invoice text or image → JSON with 
+vendor, date, items, tax and total 
+Structured output 
+(JSON schema), few-
+shot examples, field-
+level accuracy 
+C12 Meeting notes to action items Teams and student 
+clubs 
+Meeting transcript → decisions, 
+action items with owner and 
+deadline 
+Structured output, 
+chaining, checking 
+against the transcript 
+C13 Customer support reply 
+drafting 
+Support staff of a 
+small online 
+business 
+Customer complaint + company 
+policy → polite reply that follows 
+the policy 
+Document grounding, 
+tone constraints, 
+guardrails, human 
+approval step 
+C14 Product review analysis Small sellers on e-
+commerce platforms 
+Set of reviews → themes, 
+sentiment per theme and 
+suggested improvements 
+Classification 
+prompts, structured 
+output, self-
+consistency 
+C15 Research paper summariser for 
+students 
+Students doing a 
+literature review 
+Research paper → structured 
+summary: problem, method, 
+results, limitations 
+Chaining for long 
+documents, 
+hallucination checks 
+against the paper 
+C16 Email triage and reply assistant Faculty or office staff 
+with heavy inboxes 
+Email → category, priority and a 
+draft reply 
+Classification, few-
+shot examples, 
+structured output 
+C17 FAQ bot from a product manual Users of a device or 
+software 
+User question + manual → answer 
+with page or section reference 
+Document grounding 
+(RAG), refusal rules, 
+evaluation test set 
+--- PAGE 12 ---
+BENNETT UNIVERSITY  |  PROMPT ENGINEERING 
+12 
+ID Problem Users / Source Prompt engineering task 
+(input → output) 
+Techniques to use 
+C18 Terms and conditions in plain 
+language 
+Ordinary users 
+signing up for apps 
+and services 
+Terms or privacy policy → plain 
+summary and list of risky clauses 
+Chaining, structured 
+output, accuracy 
+check by human 
+reading 
+C19 Bilingual explainer (English and 
+Hindi or a regional language) 
+Learners who study 
+better in their mother 
+tongue 
+Technical concept → explanation 
+in the chosen language at the 
+chosen level 
+Audience-aware 
+prompting, few-shot 
+examples, human 
+evaluation 
+C20 Timetable and study plan 
+generator 
+Students planning 
+exam preparation 
+Subjects, exam dates and free 
+hours → day-wise study plan in a 
+table 
+Constraint-based 
+prompting, structured 
+output, constraint 
+checking 
+C21 Data analysis report writer Students and 
+analysts with CSV 
+data 
+Dataset summary or CSV → 
+findings in plain language with 
+suggested charts 
+Tool-assisted 
+workflow, chaining, 
+checking numbers 
+against the data 
+C22 Fact-check assistant for social 
+media claims 
+General public Claim + trusted sources → verdict 
+with evidence and confidence 
+level 
+Document grounding, 
+chain-of-thought, 
+self-consistency 
+C23 Prompt safety tester (red-team 
+kit) 
+Teams building 
+chatbots 
+A system prompt → set of attack 
+prompts, results and suggested 
+fixes 
+Prompt injection 
+tests, guardrails, 
+evaluation table 
+C24 Multi-step research agent Students and 
+analysts 
+Research question → plan, 
+search, notes and a cited short 
+report 
+ReAct / tool use, 
+chaining, citation 
+checks 
+Part S — Smart India Hackathon 2026 Statements Suited to Prompt 
+Engineering 
+Selected from the official SIH 2026 problem statements. Official catalogue: https://www.sih.gov.in/sih2026PS. Read the full 
+statement on the portal before you finalise. 
+ID Problem Users / Source Prompt engineering task 
+(input → output) 
+Techniques to use 
+S1 Farmers Face Long Waits & 
+Uncertainty on Procurement 
+Schedules/Status [SIH26032] 
+Ministry of Consumer 
+Affairs, Food & Public 
+Distribution 
+Farmer question in a local 
+language + procurement data → 
+status reply and next steps 
+Document grounding, 
+multilingual prompts, 
+structured output 
+S2 AI-Powered Vernacular 
+Pedagogy & Real-Time 
+Translation Tool for Mother-
+Tongue Primary Education 
+[SIH26042] 
+Government of 
+Jharkhand 
+English lesson text → explanation 
+and classroom activities in the 
+mother tongue 
+Audience-aware 
+prompting, few-shot 
+examples, human 
+evaluation 
+--- PAGE 13 ---
+BENNETT UNIVERSITY  |  PROMPT ENGINEERING 
+13 
+ID Problem Users / Source Prompt engineering task 
+(input → output) 
+Techniques to use 
+S3 Digital Platform to 
+Crowdsource Societal 
+Challenges via University–
+Industry Collaboration 
+[SIH26043] 
+Government of 
+Jharkhand 
+Problem submitted by a citizen → 
+category, short summary and 
+duplicate check 
+Classification, 
+structured output, 
+consistency testing 
+S4 Portal for Academia–Industry 
+Collaboration on Skill Mapping, 
+Internships & Placement 
+[SIH26044] 
+Ministry of Ayush Student profile + job or internship 
+description → skill gaps and 
+matching roles 
+Structured output, 
+rubric in the prompt, 
+chaining 
+S5 IP-SAKTI Sahayak — 
+Multilingual AI Assistant for IP & 
+Regulatory Guidance in 
+Ayurveda [SIH26045] 
+Ministry of Ayush Question on IP or regulation in 
+Ayurveda + official documents → 
+answer with source 
+Document grounding 
+(RAG), multilingual 
+prompts, refusal rules 
+S6 Patient Case-Taking Software 
+for Ayurveda Clinical 
+Documentation [SIH26047] 
+Ministry of Ayush Doctor's free-text notes → 
+structured case record (uses 
+made-up data only) 
+Structured output 
+(JSON), few-shot 
+examples, privacy 
+rules 
+S7 WeatherGPT — Conversational 
+AI for Weather Forecasting, 
+Alerts & Climate Information 
+[SIH26068] 
+Ministry of Earth 
+Sciences 
+Weather question + forecast data 
+→ plain answer and alert message 
+Context injection, tool 
+use, checking 
+answers against the 
+data 
+S8 CAPACITY CONNECT — Digital 
+Capacity-Building & Learning-
+Management Portal [SIH26075] 
+Ministry of Earth 
+Sciences 
+Training material → course 
+outline, quiz and learner feedback 
+Chaining, structured 
+output, rubric-based 
+evaluation 
+S9 Multilingual Cooperative 
+Governance & Legal-Assistance 
+Chatbot [SIH26088] 
+Ministry of 
+Cooperation 
+Question on cooperative rules + 
+legal text → answer in the user's 
+language with source 
+Document grounding 
+(RAG), multilingual 
+prompts, guardrails 
+S10 AI-Driven Market Linkage & 
+Smart Cataloguing App for 
+Marginalised Artisans 
+[SIH26090] 
+Ministry of Social 
+Justice & 
+Empowerment 
+(MoSJE) 
+Artisan's product details or photo 
+→ catalogue title, description and 
+tags 
+Few-shot examples, 
+multimodal prompts, 
+output format control 
+S11 AI-Driven Hyper-Local Business 
+Advisory & Financial-
+Structuring Assistant for Rural 
+Micro-Entrepreneurs 
+[SIH26091] 
+Ministry of Social 
+Justice & 
+Empowerment 
+Micro-entrepreneur's business 
+details → simple business advice 
+and cost plan 
+Role prompting, 
+constraints, human 
+oversight note 
+S12 AI-Driven Scheme-Matching for 
+Marginalised Entrepreneurs 
+[SIH26092] 
+Ministry of Social 
+Justice & 
+Empowerment 
+Entrepreneur profile + scheme 
+documents → matching schemes 
+with eligibility reasons 
+Document grounding, 
+structured output, 
+accuracy test set 
+S13 AI-Powered Institutional 
+Archive for Heritage Memorials, 
+Manuscripts & Ambedkar 
+Studies [SIH26096] 
+Ministry of Social 
+Justice & 
+Empowerment 
+Question about archive 
+documents → answer with citation 
+to the manuscript 
+Document grounding 
+(RAG), citation checks 
+--- PAGE 14 ---
+BENNETT UNIVERSITY  |  PROMPT ENGINEERING 
+14 
+ID Problem Users / Source Prompt engineering task 
+(input → output) 
+Techniques to use 
+S14 AI-Driven Voice Assistant for 
+Livelihood Mapping & Skilling 
+Recommendations (PM-AJAY) 
+[SIH26097] 
+Ministry of Social 
+Justice & 
+Empowerment 
+Spoken or typed profile of a 
+worker → livelihood options and 
+training suggestions 
+Multi-turn prompts, 
+structured output, 
+multilingual prompts 
+S15 AI-Enabled Learning Platform 
+for Competency-Gap Detection 
+& Auto-Generated Quizzes 
+(iGOT Karmayogi) [SIH26101] 
+Ministry of Statistics 
+& Programme 
+Implementation 
+Learner's answers → competency 
+gaps and auto-generated quiz 
+Chaining, few-shot 
+examples, question 
+quality rubric 
+S16 Accessibility & Quality of Public 
+Healthcare Services in 
+Rural/Underserved Areas 
+[SIH26133] 
+Government of 
+Maharashtra 
+Patient question → which health 
+service to go to and what to carry 
+(no diagnosis) 
+Guardrails, refusal 
+rules, document 
+grounding 
+S17 Aligning Skill-Development 
+Programmes with Industry & 
+Emerging Job-Market 
+Requirements [SIH26134] 
+Government of 
+Maharashtra 
+Course syllabus + job postings → 
+skill gap report and suggested 
+updates 
+Chaining, structured 
+output, comparison of 
+prompt versions 
+S18 AI-Based Interactive Quantum-
+Algorithm Learning Platform 
+[SIH26140] 
+Egreen Quanta Learner question on a quantum 
+algorithm → step-by-step 
+explanation and practice 
+question 
+Chain-of-thought, 
+audience-aware 
+prompting, 
+correctness checks 
+S19 AI/NLP Engine to Detect 
+Serious-Injury-and-Fatality 
+Precursors in Safety Incident 
+Reports [SIH26165] 
+Oil India Limited Safety incident report → risk 
+category, warning signs and 
+reason 
+Classification, few-
+shot examples, 
+accuracy on labelled 
+reports 
+S20 ORCA — Marine Ecosystem 
+Reasoning with Collaborative 
+(Agentic) AI Agents [SIH26176] 
+Indian Space 
+Research 
+Organisation (ISRO) 
+Question on marine data → plan, 
+agent steps and a reasoned 
+answer 
+ReAct / agents, tool 
+use, chaining 
+S21 Field-Deployable AI Smart-
+Farming Assistant for Crop-
+Disease, Pest & Irrigation 
+Advisory [SIH26180] 
+Qualcomm Inc Farmer's description of a crop 
+problem → likely causes and 
+advice with a caution note 
+Few-shot examples, 
+guardrails, 
+multilingual prompts 
+Part G — Briefs Based on Open Data and Guidance from Global and 
+Government Organisations 
+Use the named organisation's public data and guidance as the evidence and as the documents your prompts are grounded in. 
+ID Problem Users / Source Prompt engineering task 
+(input → output) 
+Techniques to use 
+G1 Precision & Climate-Resilient 
+Agriculture Advisory Platforms 
+FAO Digital 
+Agriculture 
+Programme — 
+https://www.fao.org/
+digital-agriculture 
+Farmer's crop, location and 
+season → advisory message in 
+simple language 
+Context injection, 
+multilingual prompts, 
+guardrails 
+--- PAGE 15 ---
+BENNETT UNIVERSITY  |  PROMPT ENGINEERING 
+15 
+ID Problem Users / Source Prompt engineering task 
+(input → output) 
+Techniques to use 
+G2 AI-Assisted Personalised 
+Learning for Underserved 
+Learners 
+UNESCO — Artificial 
+Intelligence in 
+Education — 
+https://www.unesco.
+org/en/digital-
+education/artificial-
+intelligence 
+Topic + learner level → 
+personalised explanation and 
+practice questions 
+Audience-aware 
+prompting, chaining, 
+human evaluation 
+G3 Community Legal-Aid & 
+Access-to-Justice Digital 
+Platforms 
+UNDP — Rule of Law, 
+Justice, Security & 
+Human Rights — 
+https://www.undp.or
+g/rule-of-law 
+Citizen's legal question + legal-aid 
+documents → plain information 
+and where to get help (no legal 
+advice) 
+Document grounding, 
+refusal rules, 
+guardrails 
+G4 Open-Government-Data-Driven 
+Welfare-Scheme Discovery 
+Tools 
+Open Government 
+Data (OGD) Platform 
+India — 
+https://data.gov.in 
+Citizen profile + scheme 
+documents → eligible schemes 
+with reasons and documents 
+needed 
+Document grounding 
+(RAG), structured 
+output, accuracy test 
+set 
+G5 Disaster-Relief Coordination & 
+Situation-Report Digital Tools 
+UN OCHA ReliefWeb 
+— 
+https://reliefweb.int 
+Field updates → situation report in 
+a fixed format 
+Structured output, 
+chaining, checking 
+against the inputs 
+G6 Renewable-Energy Subsidy & 
+Adoption Navigation Tools 
+International 
+Renewable Energy 
+Agency (IRENA) — 
+https://www.irena.or
+g 
+Household details + subsidy 
+documents → applicable subsidy 
+and steps to apply 
+Document grounding, 
+structured output 
+G7 Digital Career & Skills-Matching 
+Tools for Informal-Sector 
+Workers 
+International Labour 
+Organization (ILO) — 
+Future of Work — 
+https://www.ilo.org/g
+lobal/topics/future-
+of-work 
+Worker's skills and experience → 
+matching jobs and a simple 
+resume 
+Structured output, 
+few-shot examples 
+G8 Public-Sector AI Transparency 
+& Explainability Dashboards 
+OECD.AI Policy 
+Observatory — 
+https://oecd.ai 
+Description of a public AI system 
+→ plain-language explanation for 
+citizens 
+Audience-aware 
+prompting, rubric-
+based evaluation 
+G9 Open-Budget Transparency & 
+Citizen-Engagement Platforms 
+International Budget 
+Partnership — 
+https://internationalb
+udget.org 
+Budget document + citizen 
+question → answer with figures 
+and page reference 
+Document grounding, 
+checking numbers 
+against the source 
+G10 Assistive Technology for 
+Persons with Disabilities 
+W3C Web 
+Accessibility Initiative 
+(WAI) — 
+https://www.w3.org/
+WAI/ 
+Web page or image → alt text, 
+captions and simpler wording 
+Multimodal prompts, 
+constraints, human 
+evaluation 
+G11 Multilingual Consumer-
+Grievance & Service-Access 
+Tools 
+National Consumer 
+Helpline (INGRAM), 
+Dept. of Consumer 
+Affairs — 
+https://consumerhel
+pline.gov.in 
+Consumer complaint in any 
+language → category, complaint 
+draft and next steps 
+Classification, 
+multilingual prompts, 
+structured output 
+--- PAGE 16 ---
+BENNETT UNIVERSITY  |  PROMPT ENGINEERING 
+16 
+ID Problem Users / Source Prompt engineering task 
+(input → output) 
+Techniques to use 
+G12 Digital Financial-Literacy Tools 
+for Low-Income Households 
+CGAP (Consultative 
+Group to Assist the 
+Poor), World Bank 
+Group — 
+https://www.cgap.or
+g 
+Money question from a low-
+income user → simple explanation 
+(no investment advice) 
+Audience-aware 
+prompting, guardrails, 
+refusal rules 
+G13 Disaster-Resilient Housing & 
+Building-Code Advisory Tools 
+UN Office for 
+Disaster Risk 
+Reduction (UNDRR) 
+— 
+https://www.undrr.or
+g 
+House details + building-code 
+guidance → safety checklist 
+Document grounding, 
+structured output 
+G14 MSME Export-Readiness & 
+Compliance Digital Guidance 
+Tools 
+International Trade 
+Centre (ITC) SME 
+Trade Academy — 
+https://intracen.org 
+MSME product and target country 
+→ export compliance checklist 
+Document grounding, 
+chaining, structured 
+output 
+G15 Heat-Wave Public-Health 
+Advisory Generators 
+World Meteorological 
+Organization (WMO) 
+— Heat-Health 
+Action — 
+https://public.wmo.i
+nt 
+Heat forecast + audience type → 
+public health advisory message 
+Context injection, 
+tone and length 
+constraints, few-shot 
+examples 
+G16 Refugee & Migrant Service-
+Navigation Digital Tools 
+UNHCR — The UN 
+Refugee Agency — 
+https://www.unhcr.or
+g 
+Migrant's question + service 
+documents → which service to 
+use and how, in their language 
+Document grounding, 
+multilingual prompts 
+G17 Digital Reading Companions for 
+Early-Grade Literacy 
+Global Book Alliance 
+— 
+https://globalbookalli
+ance.org 
+Child's reading level → short story, 
+word meanings and questions 
+Audience-aware 
+prompting, 
+constraints, safety 
+rules for children 
+G18 Occupational-Safety Digital 
+Compliance Tools for 
+Construction Workers 
+ILO — Occupational 
+Safety and Health — 
+https://www.ilo.org/t
+opics/safety-and-
+health-work 
+Type of construction work → 
+safety checklist and toolbox-talk 
+script 
+Document grounding, 
+structured output 
+G19 Green-Computing & E-Waste 
+Reduction Advisory Tools 
+UNEP / Global E-
+waste Monitor — 
+https://www.unep.or
+g 
+Device details → repair, reuse or 
+recycle advice 
+Few-shot examples, 
+document grounding 
+Other Sources for Self-Defined Problems 
+Teams proposing their own problem may also look at Kaggle, the IndiaAI Innovation Challenge, the Open Government Data (OGD) 
+Platform India, industry and startup challenges, and research papers. Mention the source in the Milestone 1 form. Faculty approval is 
+required. 
+  
+Disclaimer: The Smart India Hackathon statements and the named organisations are taken from public sources current as of 07 S eptember 2026. 
+Students must check the exact wording on the official source before final adoption. 
