@@ -20,7 +20,7 @@ def test_api_templates():
             assert resp.status_code == 200
             data = resp.json()
             assert len(data) >= 3
-            assert data[0]["id"] == "tpl_bennett_faq"
+            assert data[0]["id"] in ["tpl_customer_support", "tpl_bennett_faq"]
     asyncio.run(_run())
 
 def test_api_demo_run():

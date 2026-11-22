@@ -100,12 +100,11 @@ class ReportGenerator:
         # Title & Meta
         elements.append(Paragraph(f"<b>{title}</b>", header_style))
         meta_text = (
-            f"<b>Course:</b> SCSE4041 Prompt Engineering &nbsp;|&nbsp; "
-            f"<b>Team ID:</b> C23 &nbsp;|&nbsp; "
-            f"<b>Problem:</b> Prompt Safety Tester (Red-Team Kit)<br/>"
-            f"<b>Date:</b> {run_summary.get('timestamp', '2026-11-22')} &nbsp;|&nbsp; "
-            f"<b>Model:</b> {run_summary.get('model_name', 'N/A')} ({run_summary.get('provider', 'fixture')}) &nbsp;|&nbsp; "
-            f"<b>Run ID:</b> {run_summary.get('run_id', 'N/A')}"
+            f"<b>Assessment:</b> AI Prompt Safety & Instruction Adherence Audit &nbsp;|&nbsp; "
+            f"<b>Platform:</b> PromptShield &nbsp;|&nbsp; "
+            f"<b>Model:</b> {run_summary.get('model_name', 'N/A')} ({run_summary.get('provider', 'fixture')})<br/>"
+            f"<b>Generated:</b> {run_summary.get('timestamp', '2026-11-23')} &nbsp;|&nbsp; "
+            f"<b>Audit ID:</b> {run_summary.get('run_id', 'N/A')}"
         )
         elements.append(Paragraph(meta_text, sub_style))
         elements.append(Spacer(1, 10))

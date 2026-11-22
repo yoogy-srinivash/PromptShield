@@ -17,8 +17,8 @@ async def lifespan(app: FastAPI):
     # Shutdown logic if any
 
 app = FastAPI(
-    title="PromptShield — Prompt Safety Tester (Red-Team Kit)",
-    description="Authorized defensive prompt security testing and guardrail hardening platform for SCSE4041 Prompt Engineering.",
+    title="PromptShield — AI Prompt Safety Tester",
+    description="Test your AI prompts. Find weaknesses. Make them safer.",
     version="1.0.0",
     lifespan=lifespan
 )
@@ -40,11 +40,8 @@ else:
     @app.get("/")
     async def root():
         return {
-            "project": "PromptShield — Prompt Safety Tester (Red-Team Kit)",
-            "course": "SCSE4041 Prompt Engineering",
-            "institution": "Bennett University",
-            "problem_bank_id": "C23",
-            "team_id": "C23",
+            "name": "PromptShield",
+            "tagline": "Test your AI prompts. Find weaknesses. Make them safer.",
             "status": "online",
             "docs": "/docs"
         }
