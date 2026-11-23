@@ -206,7 +206,8 @@ export const App: React.FC = () => {
         onOpenHowItWorks={() => setIsHowItWorksOpen(true)}
         onToggleAdvanced={() => setIsAdvancedOpen(!isAdvancedOpen)}
         isAdvancedOpen={isAdvancedOpen}
-        providerModel={providerInfo?.active_model || 'fixture-deterministic'}
+        providerModel={providerInfo?.active_model || 'simulation-engine'}
+        executionMode={providerInfo?.execution_mode || (providerInfo?.fixture_mode ? 'demo' : 'live')}
       />
 
       {/* Main Content Area */}
@@ -268,7 +269,7 @@ export const App: React.FC = () => {
 
       {/* Minimal Footer */}
       <footer className="mt-auto border-t border-slate-200/80 bg-white py-5 text-center text-xs text-slate-500">
-        <div className="max-w-3xl mx-auto px-4 flex flex-col sm:flex-row items-center justify-between gap-2">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 flex flex-col sm:flex-row items-center justify-between gap-2">
           <span>PromptShield · Automated prompt security and instruction adherence testing.</span>
           <span className="text-slate-400">All tests executed locally in a sandboxed environment.</span>
         </div>

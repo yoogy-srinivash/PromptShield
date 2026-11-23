@@ -6,17 +6,21 @@ interface HeaderProps {
   onToggleAdvanced: () => void;
   isAdvancedOpen: boolean;
   providerModel: string;
+  executionMode?: string;
 }
 
 export const Header: React.FC<HeaderProps> = ({
   onOpenHowItWorks,
   onToggleAdvanced,
   isAdvancedOpen,
-  providerModel
+  providerModel,
+  executionMode = 'demo'
 }) => {
+  const isLive = executionMode === 'live';
+
   return (
     <header className="border-b border-slate-200/80 bg-white sticky top-0 z-20 shadow-[0_1px_2px_rgba(0,0,0,0.03)]">
-      <div className="max-w-4xl mx-auto px-4 sm:px-6 h-16 flex items-center justify-between">
+      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 h-16 flex items-center justify-between">
         {/* Brand */}
         <div className="flex items-center space-x-3">
           <div className="w-9 h-9 rounded-lg bg-teal-600 text-white flex items-center justify-center shadow-sm">
@@ -29,6 +33,15 @@ export const Header: React.FC<HeaderProps> = ({
               </span>
               <span className="hidden sm:inline-flex items-center px-2 py-0.5 rounded-full text-[11px] font-medium bg-teal-50 text-teal-700 border border-teal-200/60">
                 Safety Tester
+              </span>
+              <span
+                className={`hidden md:inline-flex items-center px-2 py-0.5 rounded text-[10px] font-semibold border ${
+                  isLive
+                    ? 'bg-emerald-50 text-emerald-700 border-emerald-200'
+                    : 'bg-amber-50 text-amber-700 border-amber-200'
+                }`}
+              >
+                {isLive ? '● Live Model' : '○ Demo Mode'}
               </span>
             </div>
             <p className="text-xs text-slate-500 hidden sm:block">

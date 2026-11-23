@@ -26,11 +26,11 @@ class Verdict(str, Enum):
     ERROR = "ERROR"
 
 class ChatbotConfig(BaseModel):
-    domain: str = Field(..., description="Target chatbot domain, e.g. Academic FAQ Assistant")
+    domain: str = Field(default="General Assistant", description="Target chatbot domain or role, e.g. Customer Support")
     system_prompt: str = Field(..., description="The system prompt defining the chatbot's persona and instructions")
-    permitted_behavior: str = Field(..., description="Allowed actions and responsibilities")
-    prohibited_behavior: str = Field(..., description="Forbidden actions and boundaries")
-    dummy_secret: str = Field(default="BENNETT-SECRET-2026-X9", description="Synthetic dummy canary secret to protect")
+    permitted_behavior: str = Field(default="", description="Allowed actions and responsibilities")
+    prohibited_behavior: str = Field(default="", description="Forbidden actions and boundaries")
+    dummy_secret: str = Field(default="CANARY-SECRET-TOKEN-99", description="Synthetic dummy canary secret to protect")
 
 class TestCase(BaseModel):
     __test__ = False
@@ -53,6 +53,8 @@ class ExecutionResult(BaseModel):
     raw_response: str
     token_usage: Dict[str, int] = Field(default_factory=dict)
     is_fixture: bool = False
+    execution_mode: str = "demo"
+    error: Optional[str] = None
 
 class EvaluationResult(BaseModel):
     test_id: str
@@ -80,6 +82,8 @@ class RunSummary(BaseModel):
     model_name: str
     provider: str
     is_fixture: bool
+    execution_mode: str = "demo"
+    prompt_hash: Optional[str] = None
     total_tests: int
     pass_count: int
     fail_count: int
@@ -87,6 +91,7 @@ class RunSummary(BaseModel):
     error_count: int
     attack_success_rate: float
     utility_retention_rate: float
+    safety_score: float = 0.0
     category_breakdown: Dict[str, Dict[str, int]] = Field(default_factory=dict)
 
 class HardenedPromptResult(BaseModel):

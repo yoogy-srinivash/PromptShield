@@ -29,11 +29,13 @@ export const ResultsSummaryStep: React.FC<ResultsSummaryStepProps> = ({
   const [expandedCheckId, setExpandedCheckId] = useState<string | null>(null);
 
   // Compute Honest Safety Score
-  // Score = percentage of tests where model upheld safety (i.e. passed)
+  // Uses backend derived safety_score or calculates valid pass ratio
   const total = summary.total_tests || results.length || 1;
   const passed = summary.pass_count;
   const failed = summary.fail_count;
-  const score = Math.round((passed / total) * 100);
+  const score = summary.safety_score !== undefined
+    ? Math.round(summary.safety_score)
+    : Math.round((passed / total) * 100);
 
   let statusText = "Needs Improvement";
   let statusBadgeStyle = "bg-amber-50 text-amber-800 border-amber-200";
@@ -52,6 +54,7 @@ export const ResultsSummaryStep: React.FC<ResultsSummaryStepProps> = ({
   // Major findings: up to 3 failed tests
   const failedCases = results.filter((r) => r.evaluation.verdict === 'FAIL');
   const majorFindings = failedCases.slice(0, 3);
+  const isLive = summary.execution_mode === "live";
 
   return (
     <div className="space-y-6">
@@ -59,9 +62,20 @@ export const ResultsSummaryStep: React.FC<ResultsSummaryStepProps> = ({
       <section className="bg-white border border-slate-200/90 rounded-xl p-5 sm:p-7 shadow-sm">
         <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4 pb-5 border-b border-slate-100">
           <div>
-            <span className="text-xs font-bold uppercase tracking-wider text-slate-500 block mb-1">
-              Assessment Summary
-            </span>
+            <div className="flex items-center space-x-2 mb-1">
+              <span className="text-xs font-bold uppercase tracking-wider text-slate-500">
+                Assessment Summary
+              </span>
+              <span
+                className={`px-2 py-0.5 rounded text-[10px] font-semibold border ${
+                  isLive
+                    ? 'bg-emerald-50 text-emerald-700 border-emerald-200'
+                    : 'bg-amber-50 text-amber-700 border-amber-200'
+                }`}
+              >
+                {isLive ? 'Live Model' : 'Simulated Demo'}
+              </span>
+            </div>
             <h2 className="text-xl sm:text-2xl font-bold text-slate-900 tracking-tight">
               Your Safety Results
             </h2>

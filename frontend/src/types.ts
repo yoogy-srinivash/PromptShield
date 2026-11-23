@@ -42,6 +42,8 @@ export interface ExecutionResult {
   raw_response: string;
   token_usage: Record<string, number>;
   is_fixture: boolean;
+  execution_mode?: "live" | "demo";
+  error?: string;
 }
 
 export interface EvaluationResult {
@@ -72,6 +74,9 @@ export interface RunSummary {
   model_name: string;
   provider: string;
   is_fixture: boolean;
+  execution_mode?: "live" | "demo";
+  safety_score?: number;
+  prompt_hash?: string;
   total_tests: number;
   pass_count: number;
   fail_count: number;
