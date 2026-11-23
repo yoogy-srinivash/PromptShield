@@ -167,35 +167,85 @@ export const App: React.FC = () => {
     }
   };
 
-  // Retest Improved Prompt (Test Again)
+  // Retest Improved Prompt (Test Again with New Prompt)
   const handleRetestPrompt = async () => {
-    if (!hardenedResult || !savedTests.length) return;
+    if (!hardenedResult?.hardened_system_prompt) return;
     setIsRetesting(true);
+    setIsTesting(true);
+    setProgressError(null);
+
+    const activeConfig: ChatbotConfig = {
+      ...config,
+      system_prompt: promptText
+    };
+
     try {
-      const activeConfig: ChatbotConfig = {
-        ...config,
-        system_prompt: promptText
-      };
+      // Stage 1: Understanding instructions
+      setProgressStage('understanding');
+      await new Promise((r) => setTimeout(r, 350));
+
+      // Ensure test suite is ready
+      let testsToRun = savedTests;
+      if (!testsToRun.length) {
+        setProgressStage('creating');
+        const genResp = await fetch('/api/generate-tests', {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify(activeConfig)
+        });
+        if (!genResp.ok) throw new Error('Failed to create safety check suite.');
+        testsToRun = await genResp.json();
+        setSavedTests(testsToRun);
+      } else {
+        setProgressStage('creating');
+        await new Promise((r) => setTimeout(r, 250));
+      }
+
+      // Stage 3: Testing your new AI instructions
+      setProgressStage('testing');
       const resp = await fetch('/api/compare-prompts', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({
           config: activeConfig,
           hardened_prompt: hardenedResult.hardened_system_prompt,
-          tests: savedTests,
+          tests: testsToRun,
           diff_text: hardenedResult.diff_text
         })
       });
       if (!resp.ok) throw new Error('Failed to retest improved prompt.');
       const compData: ComparisonReport = await resp.json();
+
+      // Stage 4: Reviewing results
+      setProgressStage('reviewing');
+      await new Promise((r) => setTimeout(r, 350));
+
       setComparison(compData);
-      if (compData.hardened_run?.run_id) {
-        setLatestRunId(compData.hardened_run.run_id);
+      if (compData.hardened_run) {
+        setSummary(compData.hardened_run);
+        if (compData.hardened_run.run_id) {
+          setLatestRunId(compData.hardened_run.run_id);
+        }
       }
+      if (compData.hardened_results && compData.hardened_results.length > 0) {
+        setTestResults(compData.hardened_results);
+      }
+
+      setProgressStage('completed');
+
+      // Scroll smoothly to results
+      setTimeout(() => {
+        const el = document.getElementById('results-section');
+        if (el) el.scrollIntoView({ behavior: 'smooth' });
+      }, 120);
     } catch (e: any) {
+      console.error('Retest flow error:', e);
+      setProgressStage('error');
+      setProgressError(e?.message || 'Failed to retest improved prompt.');
       alert('Could not retest prompt: ' + (e?.message || 'Network error'));
     } finally {
       setIsRetesting(false);
+      setIsTesting(false);
     }
   };
 

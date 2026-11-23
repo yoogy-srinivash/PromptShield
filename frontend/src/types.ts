@@ -103,6 +103,7 @@ export interface ComparisonReport {
   utility_preservation_percentage: number;
   category_comparison: Record<string, Record<string, number>>;
   diff_text: string;
+  hardened_results?: EvaluatedTestCase[];
 }
 
 export interface SystemPromptTemplate {

@@ -109,6 +109,7 @@ class ComparisonReport(BaseModel):
     utility_preservation_percentage: float
     category_comparison: Dict[str, Dict[str, Any]]
     diff_text: str
+    hardened_results: List[EvaluatedTestCase] = Field(default_factory=list)
 
 class SystemPromptTemplate(BaseModel):
     id: str

@@ -172,5 +172,6 @@ class ExperimentRunner:
             asr_reduction_percentage=asr_reduction,
             utility_preservation_percentage=utility_preservation,
             category_comparison=cat_comp,
-            diff_text=diff_text
+            diff_text=diff_text,
+            hardened_results=hard_cases
         )
