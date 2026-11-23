@@ -209,15 +209,35 @@ export const App: React.FC = () => {
         providerModel={providerInfo?.active_model || 'fixture-deterministic'}
       />
 
-      {/* Main Single-Column Content */}
-      <main className="flex-1 max-w-3xl w-full mx-auto px-4 sm:px-6 py-8 sm:py-10 space-y-8 sm:space-y-10">
-        {/* STEP 1: Paste Your Prompt */}
-        <PromptInputStep
-          promptText={promptText}
-          setPromptText={setPromptText}
-          onStartTest={handleStartTest}
-          isLoading={isTesting}
-        />
+      {/* Main Content Area */}
+      <main className="flex-1 max-w-7xl w-full mx-auto px-4 sm:px-6 lg:px-8 py-8 space-y-8">
+        {/* Top: Side-by-Side Prompt Comparison Workbench */}
+        <div className="grid grid-cols-1 lg:grid-cols-2 gap-6 items-stretch">
+          {/* Left Column: STEP 1 — Is your AI prompt safe? */}
+          <div className="flex flex-col">
+            <PromptInputStep
+              promptText={promptText}
+              setPromptText={setPromptText}
+              onStartTest={handleStartTest}
+              isLoading={isTesting}
+            />
+          </div>
+
+          {/* Right Column: Make Your Prompt Stronger */}
+          <div id="improve-step" className="flex flex-col">
+            <ImprovePromptStep
+              originalPrompt={promptText}
+              hardenedResult={hardenedResult}
+              onGenerateImprovement={handleGenerateImprovement}
+              isGenerating={isGeneratingImprovement}
+              onRetestPrompt={handleRetestPrompt}
+              isRetesting={isRetesting}
+              comparison={comparison}
+              hasTested={!!summary && testResults.length > 0}
+              onStartTest={handleStartTest}
+            />
+          </div>
+        </div>
 
         {/* STEP 2: Progress Feedback (Visible when testing or if error) */}
         {(isTesting || progressStage === 'completed' || progressStage === 'error') && (
@@ -230,29 +250,19 @@ export const App: React.FC = () => {
 
         {/* STEP 3: Clear Results Summary */}
         {summary && testResults.length > 0 && (
-          <div id="results-section" className="scroll-mt-20">
+          <div id="results-section" className="scroll-mt-6">
             <ResultsSummaryStep
               summary={summary}
               results={testResults}
               onScrollToImprove={() => {
+                if (!hardenedResult) {
+                  handleGenerateImprovement();
+                }
                 const el = document.getElementById('improve-step');
                 if (el) el.scrollIntoView({ behavior: 'smooth' });
               }}
             />
           </div>
-        )}
-
-        {/* STEP 4: Make Your Prompt Stronger */}
-        {summary && testResults.length > 0 && (
-          <ImprovePromptStep
-            originalPrompt={promptText}
-            hardenedResult={hardenedResult}
-            onGenerateImprovement={handleGenerateImprovement}
-            isGenerating={isGeneratingImprovement}
-            onRetestPrompt={handleRetestPrompt}
-            isRetesting={isRetesting}
-            comparison={comparison}
-          />
         )}
       </main>
 
