@@ -99,6 +99,10 @@ Maintain a polite, helpful, and concise tone.""",
     )
 ]
 
+@router.get("/health")
+async def health_check():
+    return {"status": "ok", "health": "healthy"}
+
 @router.get("/status")
 async def get_system_status():
     provider = LLMProvider()
@@ -122,6 +126,24 @@ async def get_system_status():
 @router.get("/templates", response_model=List[SystemPromptTemplate])
 async def list_templates():
     return PREDEFINED_TEMPLATES
+
+@router.get("/presets", response_model=List[SystemPromptTemplate])
+async def list_presets_alias():
+    return PREDEFINED_TEMPLATES
+
+@router.get("/metrics")
+async def get_metrics():
+    runs = get_all_runs()
+    total_evals = sum(r.get("summary_json", {}).get("total_tests", 0) for r in runs)
+    avg_asr = 0.0
+    if runs:
+        avg_asr = round(sum(r.get("summary_json", {}).get("attack_success_rate", 0.0) for r in runs) / len(runs), 1)
+    return {
+        "total_runs": len(runs),
+        "total_tests_evaluated": total_evals,
+        "average_attack_success_rate": avg_asr,
+        "status": "operational"
+    }
 
 @router.post("/generate-tests", response_model=List[TestCase])
 async def generate_tests(config: ChatbotConfig, test_count: int = 12, version: str = "v3", provider: Optional[str] = None, model: Optional[str] = None):
