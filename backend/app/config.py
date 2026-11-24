@@ -4,13 +4,23 @@ from typing import Optional
 
 _default_db = "/tmp/promptshield.db" if (os.getenv("VERCEL") or os.getenv("AWS_LAMBDA_FUNCTION_NAME")) else "promptshield.db"
 
+def resolve_default_provider() -> str:
+    explicit = os.getenv("DEFAULT_PROVIDER")
+    if explicit:
+        return explicit.strip().lower()
+    if os.getenv("GEMINI_API_KEY"):
+        return "gemini"
+    if os.getenv("OPENAI_API_KEY"):
+        return "openai"
+    return "fixture"
+
 class Settings(BaseModel):
-    DEFAULT_PROVIDER: str = os.getenv("DEFAULT_PROVIDER", "fixture")
+    DEFAULT_PROVIDER: str = resolve_default_provider()
     GEMINI_API_KEY: Optional[str] = os.getenv("GEMINI_API_KEY", None)
     OPENAI_API_KEY: Optional[str] = os.getenv("OPENAI_API_KEY", None)
     OLLAMA_BASE_URL: str = os.getenv("OLLAMA_BASE_URL", "http://localhost:11434")
     
-    GEMINI_MODEL: str = os.getenv("GEMINI_MODEL", "gemini-2.5-flash")
+    GEMINI_MODEL: str = os.getenv("GEMINI_MODEL", "gemini-1.5-flash")
     OPENAI_MODEL: str = os.getenv("OPENAI_MODEL", "gpt-4o-mini")
     OLLAMA_MODEL: str = os.getenv("OLLAMA_MODEL", "llama3.2:latest")
     

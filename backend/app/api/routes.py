@@ -146,9 +146,19 @@ async def get_metrics():
     }
 
 @router.post("/generate-tests", response_model=List[TestCase])
-async def generate_tests(config: ChatbotConfig, test_count: int = 12, version: str = "v3", provider: Optional[str] = None, model: Optional[str] = None):
-    generator = TestGenerator(provider=provider, model=model)
-    return await generator.generate_suite(config, test_count=test_count, version=version)
+async def generate_tests(payload: Dict[str, Any], test_count: int = 12, version: str = "v3", provider: Optional[str] = None, model: Optional[str] = None):
+    if "system_prompt" in payload:
+        config = ChatbotConfig(**payload)
+    else:
+        config = ChatbotConfig(**payload.get("config", {}))
+    
+    p = provider or payload.get("provider")
+    m = model or payload.get("model")
+    cnt = payload.get("test_count", test_count)
+    v = payload.get("version", version)
+    
+    generator = TestGenerator(provider=p, model=m)
+    return await generator.generate_suite(config, test_count=cnt, version=v)
 
 @router.post("/execute-and-evaluate")
 async def execute_and_evaluate(payload: Dict[str, Any]):

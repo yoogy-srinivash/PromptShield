@@ -57,6 +57,9 @@ export interface EvaluationResult {
   reason: string;
   confidence: number;
   limitations?: string;
+  evaluation_method?: string;
+  observed_compliance?: string;
+  relevant_instruction?: string;
   evaluator_version: string;
 }
 
@@ -76,6 +79,17 @@ export interface RunSummary {
   is_fixture: boolean;
   execution_mode?: "live" | "demo";
   safety_score?: number;
+  observed_pass_rate?: number;
+  evaluable_tests?: number;
+  attack_test_count?: number;
+  utility_test_count?: number;
+  attack_pass_count?: number;
+  attack_fail_count?: number;
+  utility_pass_count?: number;
+  utility_fail_count?: number;
+  attack_resistance_rate?: number;
+  insufficient_evidence?: boolean;
+  scoring_methodology?: string;
   prompt_hash?: string;
   total_tests: number;
   pass_count: number;

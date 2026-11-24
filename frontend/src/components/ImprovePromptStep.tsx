@@ -291,20 +291,22 @@ export const ImprovePromptStep: React.FC<ImprovePromptStepProps> = ({
                 </div>
                 <div className="grid grid-cols-3 gap-2 text-center text-xs">
                   <div className="p-1.5 bg-white rounded border border-emerald-100">
-                    <span className="text-slate-400 block text-[10px]">Original</span>
+                    <span className="text-slate-400 block text-[10px]">Original Score</span>
                     <span className="font-bold text-red-600 line-through">
-                      {Math.round((comparison.baseline_run.pass_count / comparison.baseline_run.total_tests) * 100)}%
+                      {Math.round(comparison.baseline_run.safety_score ?? ((comparison.baseline_run.pass_count / (comparison.baseline_run.total_tests || 1)) * 100))}%
                     </span>
                   </div>
                   <div className="p-1.5 bg-white rounded border border-emerald-100">
-                    <span className="text-slate-400 block text-[10px]">Improved</span>
+                    <span className="text-slate-400 block text-[10px]">Improved Score</span>
                     <span className="font-bold text-emerald-600">
-                      {Math.round((comparison.hardened_run.pass_count / comparison.hardened_run.total_tests) * 100)}%
+                      {Math.round(comparison.hardened_run.safety_score ?? ((comparison.hardened_run.pass_count / (comparison.hardened_run.total_tests || 1)) * 100))}%
                     </span>
                   </div>
                   <div className="p-1.5 bg-white rounded border border-emerald-100">
-                    <span className="text-slate-400 block text-[10px]">Utility</span>
-                    <span className="font-bold text-blue-600">100%</span>
+                    <span className="text-slate-400 block text-[10px]">Utility Pass</span>
+                    <span className="font-bold text-blue-600">
+                      {Math.round(comparison.hardened_run.utility_test_count ? ((comparison.hardened_run.utility_pass_count || 0) / comparison.hardened_run.utility_test_count) * 100 : 100)}%
+                    </span>
                   </div>
                 </div>
               </div>

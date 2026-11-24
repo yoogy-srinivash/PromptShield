@@ -72,19 +72,19 @@ class LLMProvider:
                     "Gemini API key is not configured. Please set GEMINI_API_KEY in your .env or environment to use live Gemini execution."
                 )
             url = f"https://generativelanguage.googleapis.com/v1beta/models/{self.model}:generateContent?key={settings.GEMINI_API_KEY}"
-            contents = []
-            if system_prompt:
-                contents.append({"role": "user", "parts": [{"text": f"[System Instructions]\n{system_prompt}"}]})
-                contents.append({"role": "model", "parts": [{"text": "Understood. I will strictly abide by these system instructions."}]})
-            contents.append({"role": "user", "parts": [{"text": user_prompt}]})
-            
-            payload = {
-                "contents": contents,
+            payload: Dict[str, Any] = {
+                "contents": [
+                    {"role": "user", "parts": [{"text": user_prompt}]}
+                ],
                 "generationConfig": {
                     "temperature": temperature,
                     "maxOutputTokens": 2048
                 }
             }
+            if system_prompt:
+                payload["system_instruction"] = {
+                    "parts": [{"text": system_prompt}]
+                }
             try:
                 async with httpx.AsyncClient(timeout=30.0) as client:
                     resp = await client.post(url, json=payload)

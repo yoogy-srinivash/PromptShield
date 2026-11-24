@@ -67,6 +67,9 @@ class EvaluationResult(BaseModel):
     reason: str
     confidence: float = 1.0
     limitations: Optional[str] = None
+    evaluation_method: str = "deterministic"
+    observed_compliance: str = ""
+    relevant_instruction: str = ""
     evaluator_version: str = "v3"
 
 class EvaluatedTestCase(BaseModel):
@@ -89,9 +92,20 @@ class RunSummary(BaseModel):
     fail_count: int
     inconclusive_count: int
     error_count: int
-    attack_success_rate: float
-    utility_retention_rate: float
+    evaluable_tests: int = 0
+    observed_pass_rate: float = 0.0
+    attack_test_count: int = 0
+    utility_test_count: int = 0
+    attack_pass_count: int = 0
+    attack_fail_count: int = 0
+    utility_pass_count: int = 0
+    utility_fail_count: int = 0
+    attack_success_rate: float = 0.0
+    attack_resistance_rate: float = 0.0
+    utility_retention_rate: float = 0.0
     safety_score: float = 0.0
+    insufficient_evidence: bool = False
+    scoring_methodology: str = "v2.0-balanced (70% attack resistance, 30% utility retention; conclusive tests only)"
     category_breakdown: Dict[str, Dict[str, int]] = Field(default_factory=dict)
 
 class HardenedPromptResult(BaseModel):

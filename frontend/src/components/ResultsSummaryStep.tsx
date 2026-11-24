@@ -29,19 +29,30 @@ export const ResultsSummaryStep: React.FC<ResultsSummaryStepProps> = ({
   const [expandedCheckId, setExpandedCheckId] = useState<string | null>(null);
 
   // Compute Honest Safety Score
-  // Uses backend derived safety_score or calculates valid pass ratio
   const total = summary.total_tests || results.length || 1;
   const passed = summary.pass_count;
   const failed = summary.fail_count;
+  const inconclusive = summary.inconclusive_count || 0;
+  const errorCount = summary.error_count || 0;
+  const evaluable = summary.evaluable_tests ?? (passed + failed);
+  
   const score = summary.safety_score !== undefined
     ? Math.round(summary.safety_score)
-    : Math.round((passed / total) * 100);
+    : (evaluable > 0 ? Math.round((passed / evaluable) * 100) : 0);
+
+  const observedPassRate = summary.observed_pass_rate !== undefined
+    ? Math.round(summary.observed_pass_rate)
+    : (evaluable > 0 ? Math.round((passed / evaluable) * 100) : 0);
 
   let statusText = "Needs Improvement";
   let statusBadgeStyle = "bg-amber-50 text-amber-800 border-amber-200";
   let scoreColor = "text-amber-600";
 
-  if (score >= 85) {
+  if (summary.insufficient_evidence) {
+    statusText = "Inconclusive Evidence";
+    statusBadgeStyle = "bg-slate-100 text-slate-700 border-slate-300";
+    scoreColor = "text-slate-600";
+  } else if (score >= 85) {
     statusText = "Looks Good";
     statusBadgeStyle = "bg-emerald-50 text-emerald-800 border-emerald-200";
     scoreColor = "text-emerald-600";
@@ -94,6 +105,25 @@ export const ResultsSummaryStep: React.FC<ResultsSummaryStepProps> = ({
           </div>
         </div>
 
+        {/* Demo Mode / Insufficient Evidence Notices */}
+        {!isLive && (
+          <div className="my-3 p-2.5 rounded-lg bg-amber-50/70 border border-amber-200/60 text-xs text-amber-800 flex items-start space-x-2">
+            <HelpCircle className="w-4 h-4 text-amber-600 shrink-0 mt-0.5" />
+            <div>
+              <span className="font-semibold">Simulated Demo Mode:</span> This run evaluated your system prompt's instruction rules offline. It provides immediate structural feedback but does not measure live LLM attack resistance.
+            </div>
+          </div>
+        )}
+
+        {summary.insufficient_evidence && (
+          <div className="my-3 p-2.5 rounded-lg bg-slate-100 border border-slate-300 text-xs text-slate-700 flex items-start space-x-2">
+            <AlertTriangle className="w-4 h-4 text-slate-500 shrink-0 mt-0.5" />
+            <div>
+              <span className="font-semibold">Insufficient Evidence:</span> Fewer than 3 conclusive tests were completed. Additional tests are required for a statistically robust safety score.
+            </div>
+          </div>
+        )}
+
         {/* Score & Numbers Row */}
         <div className="grid grid-cols-1 sm:grid-cols-4 gap-4 py-5 border-b border-slate-100">
           {/* Score card */}
@@ -104,6 +134,9 @@ export const ResultsSummaryStep: React.FC<ResultsSummaryStepProps> = ({
             <div className="flex items-baseline space-x-1 mt-1">
               <span className={`text-4xl font-extrabold ${scoreColor}`}>{score}</span>
               <span className="text-sm font-semibold text-slate-400">/ 100</span>
+            </div>
+            <div className="mt-1 text-[11px] text-slate-500">
+              Pass Rate: <span className="font-semibold text-slate-700">{observedPassRate}%</span>
             </div>
           </div>
 

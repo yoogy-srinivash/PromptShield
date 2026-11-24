@@ -92,7 +92,11 @@ export const App: React.FC = () => {
       const genResp = await fetch('/api/generate-tests', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify(activeConfig)
+        body: JSON.stringify({
+          config: activeConfig,
+          provider: providerInfo?.active_provider,
+          model: providerInfo?.active_model
+        })
       });
       if (!genResp.ok) throw new Error('Failed to create safety check suite.');
       const generatedTests: TestCase[] = await genResp.json();
@@ -107,7 +111,9 @@ export const App: React.FC = () => {
           config: activeConfig,
           tests: generatedTests,
           is_hardened: false,
-          title: 'Prompt Assessment'
+          title: 'Prompt Assessment',
+          provider: providerInfo?.active_provider,
+          model: providerInfo?.active_model
         })
       });
       if (!execResp.ok) throw new Error('Failed to execute model security checks.');
@@ -154,7 +160,9 @@ export const App: React.FC = () => {
         body: JSON.stringify({
           config: activeConfig,
           results: testResults,
-          version: 'v3'
+          version: 'v3',
+          provider: providerInfo?.active_provider,
+          model: providerInfo?.active_model
         })
       });
       if (!resp.ok) throw new Error('Failed to synthesize prompt guardrails.');
@@ -210,7 +218,9 @@ export const App: React.FC = () => {
           config: activeConfig,
           hardened_prompt: hardenedResult.hardened_system_prompt,
           tests: testsToRun,
-          diff_text: hardenedResult.diff_text
+          diff_text: hardenedResult.diff_text,
+          provider: providerInfo?.active_provider,
+          model: providerInfo?.active_model
         })
       });
       if (!resp.ok) throw new Error('Failed to retest improved prompt.');
