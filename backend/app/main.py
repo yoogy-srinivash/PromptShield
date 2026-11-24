@@ -40,9 +40,10 @@ app.add_middleware(
 )
 
 app.include_router(router, prefix="/api")
+app.include_router(router)
 
-# Serve frontend build if available
-if os.path.exists("frontend/dist"):
+# Serve frontend build if available (on local development; on Vercel CDN serves static assets directly)
+if not (os.getenv("VERCEL") or os.getenv("AWS_LAMBDA_FUNCTION_NAME")) and os.path.exists("frontend/dist"):
     app.mount("/", StaticFiles(directory="frontend/dist", html=True), name="static")
 else:
     @app.get("/")

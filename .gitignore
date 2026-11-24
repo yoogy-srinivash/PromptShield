@@ -56,3 +56,6 @@ docs/reports/PromptShield_run_*.pdf
 Thumbs.db
 .vscode/
 .idea/
+
+.vercel
+.env*
