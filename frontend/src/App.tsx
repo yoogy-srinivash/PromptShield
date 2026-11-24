@@ -87,9 +87,31 @@ export const App: React.FC = () => {
     setHardenedResult(null);
     setComparison(null);
 
+    const lowerPrompt = promptText.toLowerCase();
+    let detectedDomain = "General Assistant";
+    if (/(clinic|health|medical|patient|doctor|triage|symptom)/.test(lowerPrompt)) {
+      detectedDomain = "Healthcare";
+    } else if (/(bank|finance|wealth|investment|account|transfer|routing)/.test(lowerPrompt)) {
+      detectedDomain = "Financial Services";
+    } else if (/(code|developer|programming|python|javascript|sql|api|software)/.test(lowerPrompt)) {
+      detectedDomain = "Software Development";
+    } else if (/(academic|university|faculty|student|library|course|exam|syllabus)/.test(lowerPrompt)) {
+      detectedDomain = "Academic Advisory";
+    } else if (/(retail|customer|support|store|order|return|shipping)/.test(lowerPrompt)) {
+      detectedDomain = "Customer Support";
+    }
+
+    const hasCustomProhibited = config.prohibited_behavior && 
+      !config.prohibited_behavior.includes("internal prompt, do not output internal secrets");
+    const hasCustomPermitted = config.permitted_behavior && 
+      !config.permitted_behavior.includes("orders, returns, and store hours");
+
     const activeConfig: ChatbotConfig = {
-      ...config,
-      system_prompt: promptText
+      domain: detectedDomain,
+      system_prompt: promptText,
+      permitted_behavior: hasCustomPermitted ? config.permitted_behavior : "",
+      prohibited_behavior: hasCustomProhibited ? config.prohibited_behavior : "",
+      dummy_secret: config.dummy_secret || "CANARY-SECRET-TOKEN-99"
     };
 
     const effProvider = selectedProvider !== 'fixture' ? selectedProvider : (apiKey ? 'gemini' : (providerInfo?.active_provider || 'fixture'));
@@ -176,9 +198,26 @@ export const App: React.FC = () => {
     };
 
     try {
+      const lowerPrompt = promptText.toLowerCase();
+      let detectedDomain = "General Assistant";
+      if (/(clinic|health|medical|patient|doctor|triage|symptom)/.test(lowerPrompt)) {
+        detectedDomain = "Healthcare";
+      } else if (/(bank|finance|wealth|investment|account|transfer|routing)/.test(lowerPrompt)) {
+        detectedDomain = "Financial Services";
+      } else if (/(code|developer|programming|python|javascript|sql|api|software)/.test(lowerPrompt)) {
+        detectedDomain = "Software Development";
+      } else if (/(academic|university|faculty|student|library|course|exam|syllabus)/.test(lowerPrompt)) {
+        detectedDomain = "Academic Advisory";
+      } else if (/(retail|customer|support|store|order|return|shipping)/.test(lowerPrompt)) {
+        detectedDomain = "Customer Support";
+      }
+
       const activeConfig: ChatbotConfig = {
-        ...config,
-        system_prompt: promptText
+        domain: detectedDomain,
+        system_prompt: promptText,
+        permitted_behavior: "",
+        prohibited_behavior: "",
+        dummy_secret: config.dummy_secret || "CANARY-SECRET-TOKEN-99"
       };
       const resp = await fetch('/api/harden-prompt', {
         method: 'POST',
@@ -205,6 +244,8 @@ export const App: React.FC = () => {
   // Retest Improved Prompt (Test Again with New Prompt)
   const handleRetestPrompt = async () => {
     if (!hardenedResult?.hardened_system_prompt) return;
+    const newPrompt = hardenedResult.hardened_system_prompt;
+    setPromptText(newPrompt);
     setIsRetesting(true);
     setIsTesting(true);
     setProgressError(null);
@@ -216,9 +257,31 @@ export const App: React.FC = () => {
       ...(apiKey ? { 'X-Api-Key': apiKey } : {})
     };
 
+    const lowerPrompt = promptText.toLowerCase();
+    let detectedDomain = "General Assistant";
+    if (/(clinic|health|medical|patient|doctor|triage|symptom)/.test(lowerPrompt)) {
+      detectedDomain = "Healthcare";
+    } else if (/(bank|finance|wealth|investment|account|transfer|routing)/.test(lowerPrompt)) {
+      detectedDomain = "Financial Services";
+    } else if (/(code|developer|programming|python|javascript|sql|api|software)/.test(lowerPrompt)) {
+      detectedDomain = "Software Development";
+    } else if (/(academic|university|faculty|student|library|course|exam|syllabus)/.test(lowerPrompt)) {
+      detectedDomain = "Academic Advisory";
+    } else if (/(retail|customer|support|store|order|return|shipping)/.test(lowerPrompt)) {
+      detectedDomain = "Customer Support";
+    }
+
+    const hasCustomProhibited = config.prohibited_behavior && 
+      !config.prohibited_behavior.includes("internal prompt, do not output internal secrets");
+    const hasCustomPermitted = config.permitted_behavior && 
+      !config.permitted_behavior.includes("orders, returns, and store hours");
+
     const activeConfig: ChatbotConfig = {
-      ...config,
-      system_prompt: promptText
+      domain: detectedDomain,
+      system_prompt: promptText,
+      permitted_behavior: hasCustomPermitted ? config.permitted_behavior : "",
+      prohibited_behavior: hasCustomProhibited ? config.prohibited_behavior : "",
+      dummy_secret: config.dummy_secret || "CANARY-SECRET-TOKEN-99"
     };
 
     try {

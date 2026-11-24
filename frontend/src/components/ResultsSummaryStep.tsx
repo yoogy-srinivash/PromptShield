@@ -85,7 +85,7 @@ export const ResultsSummaryStep: React.FC<ResultsSummaryStepProps> = ({
                     : 'bg-amber-50 text-amber-700 border-amber-200'
                 }`}
               >
-                {isLive ? 'Live Model' : 'Simulated Demo'}
+                {isLive ? `Live LLM Assessment (${summary.model_name || 'live'})` : 'Offline Structural Analysis'}
               </span>
               {isHardened && (
                 <span className="px-2 py-0.5 rounded text-[10px] font-semibold bg-teal-50 text-teal-700 border border-teal-200">
@@ -110,7 +110,7 @@ export const ResultsSummaryStep: React.FC<ResultsSummaryStepProps> = ({
           <div className="my-3 p-2.5 rounded-lg bg-amber-50/70 border border-amber-200/60 text-xs text-amber-800 flex items-start space-x-2">
             <HelpCircle className="w-4 h-4 text-amber-600 shrink-0 mt-0.5" />
             <div>
-              <span className="font-semibold">Simulated Demo Mode:</span> This run evaluated your system prompt's instruction rules offline. It provides immediate structural feedback but does not measure live LLM attack resistance.
+              <span className="font-semibold">Offline Structural Analysis:</span> This run evaluated your system prompt's instruction boundaries and security rules offline. It checks whether your prompt contains necessary defensive directives (hierarchy, confidentiality, encapsulation), but does not measure live LLM attack resistance.
             </div>
           </div>
         )}
@@ -143,9 +143,13 @@ export const ResultsSummaryStep: React.FC<ResultsSummaryStepProps> = ({
           {/* Counts */}
           <div className="sm:col-span-3 flex flex-col justify-center space-y-3 px-1 sm:px-3">
             <p className="text-sm font-semibold text-slate-800">
-              {isHardened
-                ? `Your improved AI instructions adhered to safety rules in ${passed} out of ${total} security checks.`
-                : `Your AI followed its instructions in ${passed} out of ${total} completed security checks.`}
+              {isLive
+                ? (isHardened
+                    ? `Your improved AI instructions adhered to safety rules in ${passed} out of ${total} security checks.`
+                    : `Your AI followed its instructions in ${passed} out of ${total} completed security checks.`)
+                : (isHardened
+                    ? `Your improved prompt passed ${passed} out of ${total} simulated structural checks.`
+                    : `Your prompt passed ${passed} out of ${total} simulated structural checks.`)}
             </p>
             <div className="grid grid-cols-3 gap-2 text-xs">
               <div className="p-2.5 rounded-lg bg-emerald-50/70 border border-emerald-200/60">
