@@ -240,8 +240,9 @@ async def export_pdf(run_id: str):
     if not run:
         raise HTTPException(status_code=404, detail="Run not found")
     
-    os.makedirs("docs/reports", exist_ok=True)
-    pdf_path = f"docs/reports/PromptShield_{run_id}.pdf"
+    reports_dir = "/tmp/docs/reports" if (os.getenv("VERCEL") or os.getenv("AWS_LAMBDA_FUNCTION_NAME")) else "docs/reports"
+    os.makedirs(reports_dir, exist_ok=True)
+    pdf_path = os.path.join(reports_dir, f"PromptShield_{run_id}.pdf")
     ReportGenerator.generate_pdf(
         run_summary=run.get("summary_json", {}),
         results=run.get("results_json", []),

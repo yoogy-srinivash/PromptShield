@@ -48,6 +48,9 @@ promptshield.db
 # Generated Reports
 docs/reports/PromptShield_run_*.pdf
 
+# Vercel
+.vercel/
+
 # OS & Editor
 .DS_Store
 Thumbs.db

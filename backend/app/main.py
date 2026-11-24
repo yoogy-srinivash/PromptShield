@@ -10,9 +10,17 @@ from backend.app.api.routes import router
 @asynccontextmanager
 async def lifespan(app: FastAPI):
     # Startup: ensure SQLite database and directories are initialized
-    init_db()
-    os.makedirs("docs/reports", exist_ok=True)
-    os.makedirs("test-data/outputs", exist_ok=True)
+    try:
+        init_db()
+    except Exception as e:
+        print(f"Warning: init_db failed: {e}")
+    try:
+        report_dir = "/tmp/docs/reports" if (os.getenv("VERCEL") or os.getenv("AWS_LAMBDA_FUNCTION_NAME")) else "docs/reports"
+        output_dir = "/tmp/test-data/outputs" if (os.getenv("VERCEL") or os.getenv("AWS_LAMBDA_FUNCTION_NAME")) else "test-data/outputs"
+        os.makedirs(report_dir, exist_ok=True)
+        os.makedirs(output_dir, exist_ok=True)
+    except Exception:
+        pass
     yield
     # Shutdown logic if any
 

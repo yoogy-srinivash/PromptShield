@@ -2,6 +2,8 @@ import os
 from pydantic import BaseModel
 from typing import Optional
 
+_default_db = "/tmp/promptshield.db" if (os.getenv("VERCEL") or os.getenv("AWS_LAMBDA_FUNCTION_NAME")) else "promptshield.db"
+
 class Settings(BaseModel):
     DEFAULT_PROVIDER: str = os.getenv("DEFAULT_PROVIDER", "fixture")
     GEMINI_API_KEY: Optional[str] = os.getenv("GEMINI_API_KEY", None)
@@ -14,7 +16,7 @@ class Settings(BaseModel):
     
     HOST: str = os.getenv("HOST", "127.0.0.1")
     PORT: int = int(os.getenv("PORT", "8000"))
-    DATABASE_PATH: str = os.getenv("DATABASE_PATH", "promptshield.db")
+    DATABASE_PATH: str = os.getenv("DATABASE_PATH", _default_db)
     LOG_LEVEL: str = os.getenv("LOG_LEVEL", "INFO")
 
 settings = Settings()
