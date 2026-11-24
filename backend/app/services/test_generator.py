@@ -10,8 +10,8 @@ logger = logging.getLogger("promptshield.test_generator")
 
 class TestGenerator:
     __test__ = False
-    def __init__(self, provider: Optional[str] = None, model: Optional[str] = None):
-        self.provider_client = LLMProvider(provider, model)
+    def __init__(self, provider: Optional[str] = None, model: Optional[str] = None, api_key: Optional[str] = None):
+        self.provider_client = LLMProvider(provider, model, api_key=api_key)
 
     async def generate_suite(self, config: ChatbotConfig, test_count: int = 12, version: str = "v3") -> List[TestCase]:
         status_info = self.provider_client.get_status()

@@ -19,6 +19,11 @@ interface AdvancedOptionsDrawerProps {
   setConfig: (config: ChatbotConfig) => void;
   providerInfo: any;
   latestRunId?: string;
+  apiKey?: string;
+  setApiKey?: (key: string) => void;
+  selectedProvider?: string;
+  setSelectedProvider?: (provider: string) => void;
+  onRefreshStatus?: () => void;
 }
 
 export const AdvancedOptionsDrawer: React.FC<AdvancedOptionsDrawerProps> = ({
@@ -27,11 +32,29 @@ export const AdvancedOptionsDrawer: React.FC<AdvancedOptionsDrawerProps> = ({
   config,
   setConfig,
   providerInfo,
-  latestRunId
+  latestRunId,
+  apiKey = '',
+  setApiKey,
+  selectedProvider = 'fixture',
+  setSelectedProvider,
+  onRefreshStatus
 }) => {
-  const [selectedProvider, setSelectedProvider] = useState<string>(
-    providerInfo?.active_provider || 'fixture'
-  );
+  const [localKey, setLocalKey] = useState<string>(apiKey);
+
+  const handleKeySave = (val: string) => {
+    setLocalKey(val);
+    if (setApiKey) setApiKey(val);
+    localStorage.setItem('promptshield_api_key', val);
+    if (onRefreshStatus) onRefreshStatus();
+  };
+
+  const handleProviderChange = (prov: string) => {
+    if (setSelectedProvider) setSelectedProvider(prov);
+    localStorage.setItem('promptshield_provider', prov);
+    if (onRefreshStatus) onRefreshStatus();
+  };
+
+  const isLive = providerInfo?.execution_mode === "live" || Boolean(apiKey);
 
   if (!isOpen) return null;
 
@@ -57,19 +80,71 @@ export const AdvancedOptionsDrawer: React.FC<AdvancedOptionsDrawerProps> = ({
         {/* Drawer Body */}
         <div className="flex-1 overflow-y-auto p-4 sm:p-5 space-y-6 text-xs">
           {/* Active Engine Status */}
-          <div className="p-3 rounded-lg bg-slate-50 border border-slate-200 space-y-1.5">
-            <span className="font-semibold text-slate-700 block uppercase tracking-wider text-[10px]">
-              Active Testing Engine
-            </span>
+          <div className="p-3.5 rounded-lg bg-slate-50 border border-slate-200 space-y-2">
+            <div className="flex items-center justify-between">
+              <span className="font-semibold text-slate-700 uppercase tracking-wider text-[10px]">
+                Active Testing Engine
+              </span>
+              <span
+                className={`px-2 py-0.5 rounded text-[10px] font-bold border ${
+                  isLive
+                    ? "bg-emerald-50 text-emerald-700 border-emerald-200"
+                    : "bg-amber-50 text-amber-700 border-amber-200"
+                }`}
+              >
+                {isLive ? "Live Model" : "Offline Demo"}
+              </span>
+            </div>
             <div className="flex items-center space-x-2 text-slate-900 font-mono font-medium">
               <Cpu className="w-4 h-4 text-teal-600" />
-              <span>{providerInfo?.active_model || 'fixture-deterministic-engine-v1'}</span>
+              <span>{isLive ? (providerInfo?.active_model || 'gemini-1.5-flash') : 'simulation-deterministic-engine-v2'}</span>
             </div>
             <p className="text-[11px] text-slate-500">
-              {providerInfo?.fixture_mode
-                ? "Running deterministic simulation engine for instant, repeatable testing."
-                : "Connected to configured remote LLM endpoint."}
+              {isLive
+                ? "Connected to real LLM. Prompts and adversarial attacks are executed against a live model."
+                : "Deterministic simulation engine evaluating instruction rules offline without API keys."}
             </p>
+          </div>
+
+          {/* Model Provider & API Key Configuration */}
+          <div className="space-y-3 p-3.5 rounded-lg border border-teal-100 bg-teal-50/30">
+            <span className="font-semibold text-teal-950 uppercase tracking-wider text-[10px] block">
+              Enable Live Model Testing
+            </span>
+            <div className="space-y-1.5">
+              <label className="text-slate-700 font-medium text-[11px]">LLM Provider</label>
+              <select
+                value={selectedProvider}
+                onChange={(e) => handleProviderChange(e.target.value)}
+                className="w-full text-xs p-2 rounded-lg border border-slate-300 bg-white text-slate-900 focus:outline-none focus:ring-1 focus:ring-teal-500"
+              >
+                <option value="gemini">Google Gemini (Gemini 1.5 Flash)</option>
+                <option value="openai">OpenAI (GPT-4o-mini)</option>
+                <option value="ollama">Ollama (Local Service)</option>
+                <option value="fixture">Offline Simulation Demo (No API Key Required)</option>
+              </select>
+            </div>
+
+            {(selectedProvider === "gemini" || selectedProvider === "openai") && (
+              <div className="space-y-1.5 pt-1">
+                <label className="text-slate-700 font-medium text-[11px] flex items-center justify-between">
+                  <span>{selectedProvider === "gemini" ? "Gemini API Key" : "OpenAI API Key"}</span>
+                  <span className="text-[10px] text-slate-400">Stored locally in browser</span>
+                </label>
+                <input
+                  type="password"
+                  value={localKey}
+                  onChange={(e) => handleKeySave(e.target.value)}
+                  placeholder={selectedProvider === "gemini" ? "AIzaSy..." : "sk-..."}
+                  className="w-full font-mono text-xs p-2 rounded-lg border border-slate-300 bg-white text-slate-900 focus:outline-none focus:ring-1 focus:ring-teal-500"
+                />
+                <p className="text-[10px] text-slate-500">
+                  {localKey
+                    ? "✓ Key saved. Live model testing is active."
+                    : "Enter an API key to enable live model testing in the cloud."}
+                </p>
+              </div>
+            )}
           </div>
 
           {/* Dummy Canary Secret Configuration */}

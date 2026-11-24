@@ -10,8 +10,8 @@ from backend.app.services.llm_provider import LLMProvider, safe_prompt_hash
 logger = logging.getLogger("promptshield.evaluator")
 
 class ResponseEvaluator:
-    def __init__(self, provider: Optional[str] = None, model: Optional[str] = None):
-        self.provider_client = LLMProvider(provider, model)
+    def __init__(self, provider: Optional[str] = None, model: Optional[str] = None, api_key: Optional[str] = None):
+        self.provider_client = LLMProvider(provider, model, api_key=api_key)
 
     async def evaluate(self, test: TestCase, execution: ExecutionResult, config: ChatbotConfig) -> EvaluationResult:
         resp_text = execution.raw_response or ""

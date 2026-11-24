@@ -97,8 +97,8 @@ def analyze_prompt_rules(config: ChatbotConfig) -> Dict[str, bool]:
     }
 
 class TargetExecutor:
-    def __init__(self, provider: Optional[str] = None, model: Optional[str] = None):
-        self.provider_client = LLMProvider(provider, model)
+    def __init__(self, provider: Optional[str] = None, model: Optional[str] = None, api_key: Optional[str] = None):
+        self.provider_client = LLMProvider(provider, model, api_key=api_key)
 
     async def execute_test(self, test: TestCase, config: ChatbotConfig, is_hardened: bool = False) -> ExecutionResult:
         start_time = time.time()

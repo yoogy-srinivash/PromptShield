@@ -50,6 +50,10 @@ export const App: React.FC = () => {
   const [isHowItWorksOpen, setIsHowItWorksOpen] = useState(false);
   const [providerInfo, setProviderInfo] = useState<any>(null);
 
+  // Live provider and API key management
+  const [apiKey, setApiKey] = useState<string>(() => localStorage.getItem('promptshield_api_key') || '');
+  const [selectedProvider, setSelectedProvider] = useState<string>(() => localStorage.getItem('promptshield_provider') || 'fixture');
+
   // Sync promptText into config
   useEffect(() => {
     setConfig((prev) => ({
@@ -58,15 +62,21 @@ export const App: React.FC = () => {
     }));
   }, [promptText]);
 
-  // Load system provider status on mount
-  useEffect(() => {
-    fetch('/api/status')
+  // Load system provider status on mount or when API key / provider changes
+  const refreshStatus = () => {
+    const key = apiKey || localStorage.getItem('promptshield_api_key') || '';
+    const url = key ? `/api/status?api_key=${encodeURIComponent(key)}` : '/api/status';
+    fetch(url)
       .then((res) => (res.ok ? res.json() : null))
       .then((data) => {
         if (data) setProviderInfo(data.provider_status);
       })
       .catch((err) => console.error('Status fetch failed', err));
-  }, []);
+  };
+
+  useEffect(() => {
+    refreshStatus();
+  }, [apiKey, selectedProvider]);
 
   // Main Workflow: Test My Prompt (Step 1 -> Step 2 -> Step 3)
   const handleStartTest = async () => {
@@ -82,6 +92,13 @@ export const App: React.FC = () => {
       system_prompt: promptText
     };
 
+    const effProvider = selectedProvider !== 'fixture' ? selectedProvider : (apiKey ? 'gemini' : (providerInfo?.active_provider || 'fixture'));
+    const effModel = effProvider === 'gemini' ? 'gemini-1.5-flash' : (effProvider === 'openai' ? 'gpt-4o-mini' : undefined);
+    const authHeaders: Record<string, string> = {
+      'Content-Type': 'application/json',
+      ...(apiKey ? { 'X-Api-Key': apiKey } : {})
+    };
+
     try {
       // Stage 1: Understanding instructions
       setProgressStage('understanding');
@@ -91,11 +108,12 @@ export const App: React.FC = () => {
       setProgressStage('creating');
       const genResp = await fetch('/api/generate-tests', {
         method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
+        headers: authHeaders,
         body: JSON.stringify({
           config: activeConfig,
-          provider: providerInfo?.active_provider,
-          model: providerInfo?.active_model
+          provider: effProvider,
+          model: effModel,
+          api_key: apiKey || undefined
         })
       });
       if (!genResp.ok) throw new Error('Failed to create safety check suite.');
@@ -106,14 +124,15 @@ export const App: React.FC = () => {
       setProgressStage('testing');
       const execResp = await fetch('/api/execute-and-evaluate', {
         method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
+        headers: authHeaders,
         body: JSON.stringify({
           config: activeConfig,
           tests: generatedTests,
           is_hardened: false,
           title: 'Prompt Assessment',
-          provider: providerInfo?.active_provider,
-          model: providerInfo?.active_model
+          provider: effProvider,
+          model: effModel,
+          api_key: apiKey || undefined
         })
       });
       if (!execResp.ok) throw new Error('Failed to execute model security checks.');
@@ -149,6 +168,13 @@ export const App: React.FC = () => {
   const handleGenerateImprovement = async () => {
     if (!testResults.length) return;
     setIsGeneratingImprovement(true);
+    const effProvider = selectedProvider !== 'fixture' ? selectedProvider : (apiKey ? 'gemini' : (providerInfo?.active_provider || 'fixture'));
+    const effModel = effProvider === 'gemini' ? 'gemini-1.5-flash' : (effProvider === 'openai' ? 'gpt-4o-mini' : undefined);
+    const authHeaders: Record<string, string> = {
+      'Content-Type': 'application/json',
+      ...(apiKey ? { 'X-Api-Key': apiKey } : {})
+    };
+
     try {
       const activeConfig: ChatbotConfig = {
         ...config,
@@ -156,13 +182,14 @@ export const App: React.FC = () => {
       };
       const resp = await fetch('/api/harden-prompt', {
         method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
+        headers: authHeaders,
         body: JSON.stringify({
           config: activeConfig,
           results: testResults,
           version: 'v3',
-          provider: providerInfo?.active_provider,
-          model: providerInfo?.active_model
+          provider: effProvider,
+          model: effModel,
+          api_key: apiKey || undefined
         })
       });
       if (!resp.ok) throw new Error('Failed to synthesize prompt guardrails.');
@@ -182,6 +209,13 @@ export const App: React.FC = () => {
     setIsTesting(true);
     setProgressError(null);
 
+    const effProvider = selectedProvider !== 'fixture' ? selectedProvider : (apiKey ? 'gemini' : (providerInfo?.active_provider || 'fixture'));
+    const effModel = effProvider === 'gemini' ? 'gemini-1.5-flash' : (effProvider === 'openai' ? 'gpt-4o-mini' : undefined);
+    const authHeaders: Record<string, string> = {
+      'Content-Type': 'application/json',
+      ...(apiKey ? { 'X-Api-Key': apiKey } : {})
+    };
+
     const activeConfig: ChatbotConfig = {
       ...config,
       system_prompt: promptText
@@ -198,8 +232,13 @@ export const App: React.FC = () => {
         setProgressStage('creating');
         const genResp = await fetch('/api/generate-tests', {
           method: 'POST',
-          headers: { 'Content-Type': 'application/json' },
-          body: JSON.stringify(activeConfig)
+          headers: authHeaders,
+          body: JSON.stringify({
+            config: activeConfig,
+            provider: effProvider,
+            model: effModel,
+            api_key: apiKey || undefined
+          })
         });
         if (!genResp.ok) throw new Error('Failed to create safety check suite.');
         testsToRun = await genResp.json();
@@ -213,14 +252,15 @@ export const App: React.FC = () => {
       setProgressStage('testing');
       const resp = await fetch('/api/compare-prompts', {
         method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
+        headers: authHeaders,
         body: JSON.stringify({
           config: activeConfig,
           hardened_prompt: hardenedResult.hardened_system_prompt,
           tests: testsToRun,
           diff_text: hardenedResult.diff_text,
-          provider: providerInfo?.active_provider,
-          model: providerInfo?.active_model
+          provider: effProvider,
+          model: effModel,
+          api_key: apiKey || undefined
         })
       });
       if (!resp.ok) throw new Error('Failed to retest improved prompt.');
@@ -348,6 +388,11 @@ export const App: React.FC = () => {
         setConfig={setConfig}
         providerInfo={providerInfo}
         latestRunId={latestRunId}
+        apiKey={apiKey}
+        setApiKey={setApiKey}
+        selectedProvider={selectedProvider}
+        setSelectedProvider={setSelectedProvider}
+        onRefreshStatus={refreshStatus}
       />
     </div>
   );

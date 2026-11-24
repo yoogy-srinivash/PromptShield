@@ -15,10 +15,10 @@ from backend.app.db import save_run
 logger = logging.getLogger("promptshield.experiment_runner")
 
 class ExperimentRunner:
-    def __init__(self, provider: Optional[str] = None, model: Optional[str] = None):
+    def __init__(self, provider: Optional[str] = None, model: Optional[str] = None, api_key: Optional[str] = None):
         prov = provider or settings.DEFAULT_PROVIDER
-        self.executor = TargetExecutor(prov, model)
-        self.evaluator = ResponseEvaluator(prov, model)
+        self.executor = TargetExecutor(prov, model, api_key=api_key)
+        self.evaluator = ResponseEvaluator(prov, model, api_key=api_key)
 
     async def run_suite(
         self,

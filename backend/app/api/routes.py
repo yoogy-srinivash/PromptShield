@@ -2,7 +2,7 @@ import os
 import uuid
 import logging
 from typing import List, Dict, Any, Optional
-from fastapi import APIRouter, HTTPException, Response, Request
+from fastapi import APIRouter, HTTPException, Response, Request, Header
 from fastapi.responses import FileResponse, PlainTextResponse
 
 from backend.app.models import (
@@ -104,9 +104,10 @@ async def health_check():
     return {"status": "ok", "health": "healthy"}
 
 @router.get("/status")
-async def get_system_status():
-    provider = LLMProvider()
-    status_info = provider.get_status()
+async def get_system_status(api_key: Optional[str] = None, x_api_key: Optional[str] = Header(None)):
+    key = api_key or x_api_key
+    provider = LLMProvider(api_key=key)
+    status_info = provider.get_status(api_key=key)
     return {
         "status": "operational",
         "provider_status": status_info,
@@ -146,7 +147,14 @@ async def get_metrics():
     }
 
 @router.post("/generate-tests", response_model=List[TestCase])
-async def generate_tests(payload: Dict[str, Any], test_count: int = 12, version: str = "v3", provider: Optional[str] = None, model: Optional[str] = None):
+async def generate_tests(
+    payload: Dict[str, Any],
+    test_count: int = 12,
+    version: str = "v3",
+    provider: Optional[str] = None,
+    model: Optional[str] = None,
+    x_api_key: Optional[str] = Header(None)
+):
     if "system_prompt" in payload:
         config = ChatbotConfig(**payload)
     else:
@@ -154,25 +162,27 @@ async def generate_tests(payload: Dict[str, Any], test_count: int = 12, version:
     
     p = provider or payload.get("provider")
     m = model or payload.get("model")
+    api_key = payload.get("api_key") or x_api_key
     cnt = payload.get("test_count", test_count)
     v = payload.get("version", version)
     
-    generator = TestGenerator(provider=p, model=m)
+    generator = TestGenerator(provider=p, model=m, api_key=api_key)
     return await generator.generate_suite(config, test_count=cnt, version=v)
 
 @router.post("/execute-and-evaluate")
-async def execute_and_evaluate(payload: Dict[str, Any]):
+async def execute_and_evaluate(payload: Dict[str, Any], x_api_key: Optional[str] = Header(None)):
     config_dict = payload.get("config", {})
     tests_raw = payload.get("tests", [])
     is_hardened = payload.get("is_hardened", False)
     title = payload.get("title", "Adversarial Assessment Run")
     provider = payload.get("provider")
     model = payload.get("model")
+    api_key = payload.get("api_key") or x_api_key
     
     config = ChatbotConfig(**config_dict)
     tests = [TestCase(**t) for t in tests_raw]
     
-    runner = ExperimentRunner(provider=provider, model=model)
+    runner = ExperimentRunner(provider=provider, model=model, api_key=api_key)
     summary, evaluated_cases = await runner.run_suite(config, tests, is_hardened=is_hardened, title=title)
     
     return {
@@ -181,32 +191,34 @@ async def execute_and_evaluate(payload: Dict[str, Any]):
     }
 
 @router.post("/harden-prompt", response_model=HardenedPromptResult)
-async def harden_prompt(payload: Dict[str, Any]):
+async def harden_prompt(payload: Dict[str, Any], x_api_key: Optional[str] = Header(None)):
     config_dict = payload.get("config", {})
     results_raw = payload.get("results", [])
     version = payload.get("version", "v3")
     provider = payload.get("provider")
     model = payload.get("model")
+    api_key = payload.get("api_key") or x_api_key
 
     config = ChatbotConfig(**config_dict)
     evaluated_cases = [EvaluatedTestCase(**r) for r in results_raw]
 
-    optimizer = GuardrailOptimizer(provider=provider, model=model)
+    optimizer = GuardrailOptimizer(provider=provider, model=model, api_key=api_key)
     return await optimizer.optimize(config, evaluated_cases, version=version)
 
 @router.post("/compare-prompts", response_model=ComparisonReport)
-async def compare_prompts(payload: Dict[str, Any]):
+async def compare_prompts(payload: Dict[str, Any], x_api_key: Optional[str] = Header(None)):
     config_dict = payload.get("config", {})
     hardened_prompt = payload.get("hardened_prompt", "")
     tests_raw = payload.get("tests", [])
     diff_text = payload.get("diff_text", "")
     provider = payload.get("provider")
     model = payload.get("model")
+    api_key = payload.get("api_key") or x_api_key
 
     config = ChatbotConfig(**config_dict)
     tests = [TestCase(**t) for t in tests_raw]
 
-    runner = ExperimentRunner(provider=provider, model=model)
+    runner = ExperimentRunner(provider=provider, model=model, api_key=api_key)
     return await runner.compare_prompts(config, hardened_prompt, tests, diff_text=diff_text)
 
 @router.get("/runs")

@@ -15,14 +15,28 @@ def safe_prompt_hash(prompt: Optional[str]) -> str:
     return hashlib.sha256(prompt.strip().encode("utf-8")).hexdigest()[:12]
 
 class LLMProvider:
-    def __init__(self, provider: Optional[str] = None, model: Optional[str] = None):
-        self.provider = provider or settings.DEFAULT_PROVIDER
+    def __init__(self, provider: Optional[str] = None, model: Optional[str] = None, api_key: Optional[str] = None):
+        self.api_key = api_key
+        
+        # Determine effective provider
+        if not provider:
+            effective_gemini_key = self.api_key if (self.api_key and not self.api_key.startswith("sk-")) else settings.GEMINI_API_KEY
+            effective_openai_key = self.api_key if (self.api_key and self.api_key.startswith("sk-")) else settings.OPENAI_API_KEY
+            if effective_gemini_key:
+                self.provider = "gemini"
+            elif effective_openai_key:
+                self.provider = "openai"
+            else:
+                self.provider = settings.DEFAULT_PROVIDER
+        else:
+            self.provider = provider
+
         if self.provider == "gemini":
             self.model = model or settings.GEMINI_MODEL
-            self.api_key = settings.GEMINI_API_KEY
+            self.api_key = self.api_key or settings.GEMINI_API_KEY
         elif self.provider == "openai":
             self.model = model or settings.OPENAI_MODEL
-            self.api_key = settings.OPENAI_API_KEY
+            self.api_key = self.api_key or settings.OPENAI_API_KEY
         elif self.provider == "ollama":
             self.model = model or settings.OLLAMA_MODEL
             self.base_url = settings.OLLAMA_BASE_URL
@@ -31,10 +45,13 @@ class LLMProvider:
             self.model = model or "simulation-deterministic-engine-v2"
             self.api_key = None
 
-    def get_status(self) -> Dict[str, Any]:
+    def get_status(self, api_key: Optional[str] = None) -> Dict[str, Any]:
+        key = api_key or self.api_key
+        gemini_has_key = bool(key if (key and not key.startswith("sk-")) else settings.GEMINI_API_KEY)
+        openai_has_key = bool(key if (key and key.startswith("sk-")) else settings.OPENAI_API_KEY)
+
         ollama_reachable = False
         ollama_models: List[str] = []
-        # Only probe Ollama if active provider is ollama or explicitly requested
         if self.provider == "ollama":
             try:
                 with httpx.Client(timeout=1.0) as client:
@@ -46,17 +63,20 @@ class LLMProvider:
             except Exception:
                 ollama_reachable = False
 
-        is_live = self.provider in ["gemini", "openai", "ollama"]
+        is_live = (self.provider == "gemini" and gemini_has_key) or \
+                  (self.provider == "openai" and openai_has_key) or \
+                  (self.provider == "ollama" and ollama_reachable)
+
         return {
-            "active_provider": self.provider,
-            "active_model": self.model,
+            "active_provider": self.provider if is_live else ("fixture" if self.provider != "ollama" else "ollama"),
+            "active_model": self.model if is_live else "simulation-deterministic-engine-v2",
             "execution_mode": "live" if is_live else "demo",
-            "gemini_available": bool(settings.GEMINI_API_KEY),
-            "openai_available": bool(settings.OPENAI_API_KEY),
+            "gemini_available": gemini_has_key,
+            "openai_available": openai_has_key,
             "ollama_url": settings.OLLAMA_BASE_URL,
             "ollama_available": ollama_reachable,
             "ollama_models": ollama_models,
-            "fixture_mode": (self.provider in ["fixture", "demo"])
+            "fixture_mode": not is_live
         }
 
     async def generate(self, system_prompt: Optional[str], user_prompt: str, temperature: float = 0.2) -> Dict[str, Any]:
@@ -67,11 +87,12 @@ class LLMProvider:
 
         # 1. Google Gemini Live Execution
         if self.provider == "gemini":
-            if not settings.GEMINI_API_KEY:
+            effective_key = self.api_key or settings.GEMINI_API_KEY
+            if not effective_key:
                 raise RuntimeError(
-                    "Gemini API key is not configured. Please set GEMINI_API_KEY in your .env or environment to use live Gemini execution."
+                    "Gemini API key is not configured. Please set GEMINI_API_KEY in environment or provide an API key in settings."
                 )
-            url = f"https://generativelanguage.googleapis.com/v1beta/models/{self.model}:generateContent?key={settings.GEMINI_API_KEY}"
+            url = f"https://generativelanguage.googleapis.com/v1beta/models/{self.model}:generateContent?key={effective_key}"
             payload: Dict[str, Any] = {
                 "contents": [
                     {"role": "user", "parts": [{"text": user_prompt}]}
@@ -110,12 +131,13 @@ class LLMProvider:
 
         # 2. OpenAI Live Execution
         if self.provider == "openai":
-            if not settings.OPENAI_API_KEY:
+            effective_key = self.api_key or settings.OPENAI_API_KEY
+            if not effective_key:
                 raise RuntimeError(
-                    "OpenAI API key is not configured. Please set OPENAI_API_KEY in your .env or environment to use live OpenAI execution."
+                    "OpenAI API key is not configured. Please set OPENAI_API_KEY in environment or provide an API key in settings."
                 )
             url = "https://api.openai.com/v1/chat/completions"
-            headers = {"Authorization": f"Bearer {settings.OPENAI_API_KEY}"}
+            headers = {"Authorization": f"Bearer {effective_key}"}
             messages = []
             if system_prompt:
                 messages.append({"role": "system", "content": system_prompt})

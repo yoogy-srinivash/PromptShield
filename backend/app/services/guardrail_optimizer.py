@@ -10,8 +10,8 @@ from backend.app.services.dynamic_suite_builder import synthesize_domain_hardene
 logger = logging.getLogger("promptshield.guardrail_optimizer")
 
 class GuardrailOptimizer:
-    def __init__(self, provider: Optional[str] = None, model: Optional[str] = None):
-        self.provider_client = LLMProvider(provider, model)
+    def __init__(self, provider: Optional[str] = None, model: Optional[str] = None, api_key: Optional[str] = None):
+        self.provider_client = LLMProvider(provider, model, api_key=api_key)
 
     async def optimize(
         self,
