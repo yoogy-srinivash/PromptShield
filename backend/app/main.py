@@ -1,8 +1,9 @@
 import os
 from contextlib import asynccontextmanager
-from fastapi import FastAPI
+from fastapi import FastAPI, HTTPException
 from fastapi.middleware.cors import CORSMiddleware
 from fastapi.staticfiles import StaticFiles
+from fastapi.responses import FileResponse
 from backend.app.config import settings
 from backend.app.db import init_db
 from backend.app.api.routes import router
@@ -42,9 +43,43 @@ app.add_middleware(
 app.include_router(router, prefix="/api")
 app.include_router(router)
 
-# Serve frontend build if available (on local development; on Vercel CDN serves static assets directly)
-if not (os.getenv("VERCEL") or os.getenv("AWS_LAMBDA_FUNCTION_NAME")) and os.path.exists("frontend/dist"):
-    app.mount("/", StaticFiles(directory="frontend/dist", html=True), name="static")
+# Serve frontend build (both locally and on Vercel)
+_base_dir = os.path.dirname(os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
+_frontend_dist = os.path.join(_base_dir, "frontend", "dist")
+if not os.path.exists(_frontend_dist):
+    _frontend_dist = os.path.abspath("frontend/dist")
+
+if os.path.exists(_frontend_dist):
+    _assets_path = os.path.join(_frontend_dist, "assets")
+    if os.path.exists(_assets_path):
+        app.mount("/assets", StaticFiles(directory=_assets_path), name="static_assets")
+
+    @app.get("/shield.svg")
+    async def shield_icon():
+        svg_file = os.path.join(_frontend_dist, "shield.svg")
+        if os.path.exists(svg_file):
+            return FileResponse(svg_file, media_type="image/svg+xml")
+        raise HTTPException(status_code=404)
+
+    @app.get("/")
+    @app.get("/index.html")
+    async def serve_index():
+        index_file = os.path.join(_frontend_dist, "index.html")
+        if os.path.exists(index_file):
+            return FileResponse(index_file)
+        raise HTTPException(status_code=404, detail="index.html not found")
+
+    @app.get("/{catchall:path}")
+    async def spa_fallback(catchall: str):
+        if catchall.startswith("api"):
+            raise HTTPException(status_code=404, detail="Not Found")
+        file_candidate = os.path.join(_frontend_dist, catchall)
+        if os.path.isfile(file_candidate):
+            return FileResponse(file_candidate)
+        index_file = os.path.join(_frontend_dist, "index.html")
+        if os.path.exists(index_file):
+            return FileResponse(index_file)
+        raise HTTPException(status_code=404, detail="Not Found")
 else:
     @app.get("/")
     async def root():
